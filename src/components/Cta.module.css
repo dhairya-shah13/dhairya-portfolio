@@ -1,0 +1,88 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 0;
+}
+
+.title {
+  font-size: 5rem; /* ~80px */
+  line-height: 1.0;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.subline {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.ctaButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--text-primary);
+  color: var(--bg-current);
+  padding: 18px 36px;
+  border-radius: 40px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: background-color var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard),
+              transform var(--duration-fast) var(--ease-standard),
+              box-shadow var(--duration-fast) var(--ease-standard);
+  cursor: pointer;
+}
+
+.ctaButton:hover {
+  background-color: var(--accent-red);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(239, 68, 68, 0.35);
+}
+
+.arrowIcon {
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.ctaButton:hover .arrowIcon {
+  transform: translateX(4px);
+}
+
+/* RESPONSIVE BEHAVIOR */
+
+@media (max-width: 1024px) {
+  .title {
+    font-size: 4rem;
+  }
+  
+  .subline {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .title {
+    font-size: 2.5rem;
+    line-height: 1.1;
+  }
+
+  .subline {
+    font-size: 1rem;
+    margin-bottom: 24px;
+  }
+
+  .ctaButton {
+    padding: 14px 28px;
+    font-size: 0.95rem;
+  }
+}

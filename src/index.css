@@ -1,0 +1,198 @@
+/* Design Tokens & Global CSS */
+
+:root {
+  /* Color Palette (Raw Values) */
+  --bg-light: #F5F4F1; /* Off-white, not pure white */
+  --bg-dark: #0A0A0A;  /* Off-black */
+  --accent-red: #EF4444; /* Alert/Interactive Red */
+  
+  /* Motion Tokens (from UISKILL.md) */
+  --duration-instant: 100ms;
+  --duration-fast:    150ms;
+  --duration-base:    250ms;
+  --duration-slow:    400ms;
+  --duration-page:    600ms;
+  
+  --ease-standard:    cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-decelerate:  cubic-bezier(0, 0, 0.2, 1);
+  --ease-accelerate:  cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* Base resets & layout */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-dark); /* Default to dark underlying */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #FFFFFF;
+}
+
+body {
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography styles */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter Tight', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+}
+
+p {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  color: var(--text-muted);
+}
+
+/* Numerals (technical, condensed look) */
+.numeral {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Section Colors Scoped */
+.section-light {
+  --bg-current: var(--bg-light);
+  --text-primary: #111111;
+  --text-muted: #6B6B6B;
+  --border-current: #E4E2DD;
+  background-color: var(--bg-current);
+  color: var(--text-primary);
+}
+
+.section-dark {
+  --bg-current: var(--bg-dark);
+  --text-primary: #FFFFFF;
+  --text-muted: #9A9A9A;
+  --border-current: #242424;
+  background-color: var(--bg-current);
+  color: var(--text-primary);
+}
+
+/* Accent element utilities */
+.text-accent {
+  color: var(--accent-red) !important;
+}
+
+/* Layout Utilities */
+.container {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+
+.section-padding {
+  padding-top: 140px;
+  padding-bottom: 140px;
+}
+
+@media (max-width: 767px) {
+  .section-padding {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+}
+
+/* Interactive helper rules */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+/* Custom selection styling */
+::selection {
+  background-color: var(--accent-red);
+  color: #FFFFFF;
+}
+
+/* Frame design / Image frame styles */
+.image-container {
+  overflow: hidden;
+  border-radius: 16px;
+  background-color: var(--border-current);
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Grid helper */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+@media (max-width: 1024px) {
+  .grid-2 {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* Input Fields Styles (floating cards / form inputs) */
+input, textarea {
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid var(--border-current);
+  border-radius: 8px;
+  padding: 16px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color var(--duration-fast) var(--ease-standard);
+  outline: none;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--accent-red);
+}
+
+/* Simple timeline items */
+.timeline-card {
+  border-left: 2px solid var(--border-current);
+  padding-left: 32px;
+  position: relative;
+}
+
+.timeline-card::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 8px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--accent-red);
+}

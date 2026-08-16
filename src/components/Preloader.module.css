@@ -1,0 +1,66 @@
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #FFFFFF; /* Solid white background as requested */
+  color: #111111; /* Dark text for contrast */
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 280px;
+}
+
+.wordmark {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 800;
+  font-size: 1.75rem;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: #111111;
+}
+
+.counterWrapper {
+  display: flex;
+  align-items: flex-start;
+  color: #111111;
+}
+
+.counter {
+  font-size: 4.5rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.percent {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 8px;
+  color: var(--accent-red);
+}
+
+.progressBarWrapper {
+  width: 100%;
+  height: 3px;
+  background-color: #F0EEEA;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background-color: var(--accent-red);
+  width: 0;
+}

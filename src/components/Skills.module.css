@@ -1,0 +1,130 @@
+.header {
+  margin-bottom: 60px;
+}
+
+.eyebrow {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: var(--accent-red);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: 3rem;
+  color: var(--text-primary);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+/* Adjust grid columns when total items is 5 */
+@media (min-width: 1024px) {
+  /* Let the DevOps card span 2 columns on widescreen to balance the 5 items */
+  .skillCard:nth-child(5) {
+    grid-column: span 2;
+  }
+}
+
+.skillCard {
+  background-color: #FFFFFF;
+  border: 1px solid var(--border-current);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cardTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.iconWrapper {
+  width: 44px;
+  height: 44px;
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--accent-red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.categoryName {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+.pillsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--bg-current);
+  border: 1px solid var(--border-current);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 20px;
+  transition: border-color var(--duration-fast) var(--ease-standard),
+              background-color var(--duration-fast) var(--ease-standard);
+}
+
+.skillCard:hover .pill {
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.pillIcon {
+  color: var(--accent-red);
+  flex-shrink: 0;
+}
+
+/* RESPONSIVE BEHAVIOR */
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .skillCard:nth-child(5) {
+    grid-column: span 2; /* Full width on tablet */
+  }
+}
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .skillCard:nth-child(5) {
+    grid-column: span 1;
+  }
+  
+  .skillCard {
+    padding: 24px;
+  }
+
+  .title {
+    font-size: 2.25rem;
+  }
+}

@@ -1,0 +1,165 @@
+.footer {
+  padding-top: 120px;
+  padding-bottom: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-bottom: 80px;
+}
+
+.linksBlock {
+  display: flex;
+  gap: 120px;
+}
+
+.linkColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.columnHeader {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--accent-red);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.link {
+  font-size: 1rem;
+  color: #9A9A9A;
+  transition: color var(--duration-fast) var(--ease-standard),
+              transform var(--duration-fast) var(--ease-standard);
+  width: fit-content;
+}
+
+.link:hover {
+  color: #FFFFFF;
+  transform: translateX(4px);
+}
+
+.topBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #9A9A9A;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard),
+              border-color var(--duration-fast) var(--ease-standard),
+              transform var(--duration-fast) var(--ease-standard);
+}
+
+.topBtn:hover {
+  background-color: #FFFFFF;
+  color: #0A0A0A;
+  border-color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+/* Huge Signature Wordmark */
+.wordmarkContainer {
+  width: 100%;
+  margin-bottom: 80px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.wordmark {
+  font-size: 9.5vw; /* Scales responsively with view width */
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  user-select: none;
+  pointer-events: none;
+}
+
+.wordmarkOutline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.15);
+}
+
+/* Bottom Bar */
+.bottomBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 24px;
+}
+
+.copyright {
+  font-size: 0.85rem;
+  color: #6B6B6B;
+}
+
+.monogram {
+  font-size: 0.95rem;
+  color: #6B6B6B;
+}
+
+/* RESPONSIVE BEHAVIOR */
+
+@media (max-width: 1024px) {
+  .linksBlock {
+    gap: 80px;
+  }
+}
+
+@media (max-width: 767px) {
+  .footer {
+    padding-top: 80px;
+  }
+
+  .topRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 48px;
+    margin-bottom: 60px;
+  }
+
+  .linksBlock {
+    gap: 60px;
+    justify-content: space-between;
+  }
+
+  .topBtn {
+    align-self: flex-start;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .wordmarkContainer {
+    margin-bottom: 48px;
+  }
+
+  .wordmark {
+    font-size: 11vw; /* Scales smaller or wraps cleanly */
+    line-height: 1.0;
+  }
+
+  .bottomBar {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+}

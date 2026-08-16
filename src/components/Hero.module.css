@@ -1,0 +1,335 @@
+.heroSection {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: 140px;
+  padding-bottom: 120px;
+}
+
+.heroContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+/* Badge Row Styling */
+.badgeRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: var(--text-muted);
+}
+
+.statusBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--accent-red);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.pulseDot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-red);
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  animation: pulse 1.6s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(239, 68, 68, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+.socialLinks {
+  display: flex;
+  gap: 16px;
+}
+
+.socialLinks a {
+  color: var(--text-muted);
+  transition: color var(--duration-fast) var(--ease-standard);
+  display: flex;
+  align-items: center;
+}
+
+.socialLinks a:hover {
+  color: #FFFFFF;
+}
+
+.scrollLink {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.scrollLink:hover {
+  color: #FFFFFF;
+}
+
+.arrowIcon {
+  animation: bounceDown 2s infinite;
+}
+
+@keyframes bounceDown {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-4px);
+  }
+  60% {
+    transform: translateY(-2px);
+  }
+}
+
+.yearBadge {
+  font-weight: 500;
+}
+
+/* Hero Content Layout */
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  z-index: 10;
+}
+
+.headline {
+  font-size: 5rem; /* ~80px */
+  line-height: 1.0;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #FFFFFF;
+}
+
+.outlineText {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.8);
+}
+
+.overlapContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.accentText {
+  color: var(--accent-red);
+}
+
+.subline {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.bullet {
+  color: var(--accent-red);
+  margin: 0 8px;
+}
+
+/* Asymmetric Photo Collage Styling */
+.collageContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  max-width: 420px;
+  justify-self: end;
+  z-index: 5;
+}
+
+.photoFrame {
+  position: relative;
+  width: 90%;
+  height: 90%;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  z-index: 3;
+}
+
+.profileImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(1.1);
+  transition: filter var(--duration-slow) var(--ease-standard);
+}
+
+.photoFrame:hover .profileImg {
+  filter: grayscale(0%) contrast(1.0);
+}
+
+.offsetBlock {
+  position: absolute;
+  border-radius: 20px;
+}
+
+.blockLight {
+  width: 90%;
+  height: 90%;
+  background-color: var(--bg-light);
+  top: 8%;
+  left: 8%;
+  z-index: 1;
+}
+
+.blockDark {
+  width: 60%;
+  height: 80%;
+  background-color: transparent;
+  border: 1.5px solid var(--accent-red);
+  bottom: 12%;
+  right: -5%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* DS Monogram Badge */
+.monogramBadge {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: var(--accent-red);
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(239, 68, 68, 0.4);
+  z-index: 4;
+  border: 2px solid #FFFFFF;
+  transform: rotate(-15deg);
+}
+
+.monogramText {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.monogramSub {
+  font-size: 0.6rem;
+  line-height: 1;
+  margin-top: -2px;
+  font-weight: bold;
+}
+
+/* BREAKPOINT BEHAVIORS (Matching Design.md section 3) */
+
+/* Desktop (>= 1280px) */
+@media (min-width: 1280px) {
+  .headline {
+    font-size: 5.5rem; /* ~88px */
+  }
+}
+
+/* Tablet (768px - 1279px) */
+@media (max-width: 1279px) {
+  .heroSection {
+    padding-top: 120px;
+    padding-bottom: 80px;
+  }
+
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .textBlock {
+    align-items: center;
+  }
+
+  .headline {
+    font-size: 4rem; /* 64px */
+  }
+
+  .collageContainer {
+    justify-self: center;
+    max-width: 360px;
+  }
+}
+
+/* Mobile (< 768px) */
+@media (max-width: 767px) {
+  .heroSection {
+    padding-top: 100px;
+    padding-bottom: 60px;
+  }
+
+  .badgeRow {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 16px;
+  }
+
+  .scrollLink {
+    display: none; /* Hide on mobile to clean up space */
+  }
+
+  .headline {
+    font-size: 2.75rem; /* ~44px */
+  }
+
+  .subline {
+    font-size: 1rem;
+  }
+
+  .collageContainer {
+    max-width: 280px;
+  }
+
+  .monogramBadge {
+    width: 60px;
+    height: 60px;
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .monogramText {
+    font-size: 1.1rem;
+  }
+}
