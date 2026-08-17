@@ -121,6 +121,30 @@ a {
   transition: color var(--duration-fast) var(--ease-standard);
 }
 
+/* Accessible keyboard focus — visible on every interactive element */
+:focus-visible {
+  outline: 2px solid var(--accent-red);
+  outline-offset: 3px;
+}
+
+/* Keep anchor targets clear of the fixed navbar */
+section[id] {
+  scroll-margin-top: 90px;
+}
+
+/* Reduced motion: collapse CSS transitions/animations. JS-driven motion is
+   handled globally by <MotionConfig reducedMotion="user"> in App.jsx. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* Custom selection styling */
 ::selection {
   background-color: var(--accent-red);

@@ -1,16 +1,11 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Briefcase, Calendar } from 'lucide-react';
+import { experienceData } from '../data/siteContent.js';
 import styles from './Experience.module.css';
 
 function Experience() {
-  const listItems = [
-    'Led two concurrent development teams, taking both software products from concept to production use company-wide.',
-    'Led development & deployment of VassuERP, a full-scale enterprise resource planning system (Django, Flask, SQL, MongoDB).',
-    'Led development & deployment of StockFlow, an inventory management system with dedicated stock inflow/outflow modules.',
-    'Containerized application services using Docker, set up automated CI/CD pipelines, and wrote Linux shell scripts for VPS provisioning (Hostinger).',
-    'Managed source control and collaborative team workflows via Git/GitHub across both engineering teams.'
-  ];
+  const listItems = experienceData.bullets;
 
   return (
     <section id="experience" className="section-light section-padding" style={{ borderTop: '1px solid var(--border-current)' }}>
@@ -37,20 +32,20 @@ function Experience() {
             <div className={styles.card}>
               <div className={styles.cardHeader}>
                 <div className={styles.titleGroup}>
-                  <h3 className={styles.role}>Software Development Engineer & Project Lead</h3>
-                  <span className={styles.company}>Vassu Infotech</span>
+                  <h3 className={styles.role}>{experienceData.role}</h3>
+                  <span className={styles.company}>{experienceData.company}</span>
                 </div>
                 <div className={styles.metaGroup}>
                   <span className={styles.metaLabel}>
                     <Calendar size={14} className={styles.metaIcon} />
-                    May 2026 – Jul 2026
+                    {experienceData.period}
                   </span>
-                  <span className={styles.orgSize}>~30 Employees</span>
+                  <span className={styles.orgSize}>{experienceData.orgSize}</span>
                 </div>
               </div>
 
               <p className={styles.description}>
-                A hardware manufacturer expanding operations into custom software and IT services. Led cross-functional teams to design, build, and deploy production software.
+                {experienceData.summary}
               </p>
 
               <ul className={styles.bulletList}>

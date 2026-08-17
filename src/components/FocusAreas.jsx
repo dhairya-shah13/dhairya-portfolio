@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { focusAreasData as baseFocusAreas } from '../data/siteContent.js';
 import styles from './FocusAreas.module.css';
 
 // Import focus area images (user can replace these files directly)
@@ -8,32 +9,11 @@ import focus2 from '../assets/focus2.jpg';
 import focus3 from '../assets/focus3.jpg';
 import focus4 from '../assets/focus4.jpg';
 
-const focusAreasData = [
-  {
-    id: '01',
-    title: 'Full-Stack Development',
-    description: 'MERN & Django/Flask, coordinating API contracts between React/Node front ends and Python back ends.',
-    image: focus1
-  },
-  {
-    id: '02',
-    title: 'Cloud & DevOps',
-    description: 'Docker containerization, GitHub Actions CI/CD, Linux shell scripting, Hostinger VPS provisioning.',
-    image: focus2
-  },
-  {
-    id: '03',
-    title: 'Team & Project Leadership',
-    description: 'Led two concurrent engineering teams at Vassu Infotech, taking both products to company-wide production use.',
-    image: focus3
-  },
-  {
-    id: '04',
-    title: 'Database Design',
-    description: 'SQL and MongoDB schema design across ERP, inventory, and finance-tracking systems.',
-    image: focus4
-  }
-];
+const focusImages = [focus1, focus2, focus3, focus4];
+const focusAreasData = baseFocusAreas.map((item, index) => ({
+  ...item,
+  image: focusImages[index] || focus1,
+}));
 
 function FocusAreas() {
   const [activeIndex, setActiveIndex] = useState(0);

@@ -1,0 +1,204 @@
+/* Projects index page */
+
+.headerSection {
+  padding-top: 180px;
+  padding-bottom: 100px;
+}
+
+.eyebrow {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: var(--accent-red);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 4rem;
+  color: #FFFFFF;
+  letter-spacing: -0.04em;
+  margin-bottom: 16px;
+}
+
+.subline {
+  font-size: 1.2rem;
+  color: #9A9A9A;
+  max-width: 60ch;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.thumbnailContainer {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: var(--border-current);
+  aspect-ratio: 8 / 5;
+}
+
+.projectImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.projectIndex {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background-color: rgba(10, 10, 10, 0.75);
+  color: #FFFFFF;
+  font-size: 0.9rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+}
+
+.tagList {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  background-color: rgba(10, 10, 10, 0.75);
+  color: #FFFFFF;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 16px;
+  backdrop-filter: blur(4px);
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.projectName {
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+.projectCategory {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--accent-red);
+}
+
+.projectDescription {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.linkRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.caseStudyLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  border: 1px solid var(--border-current);
+  padding: 10px 18px;
+  border-radius: 24px;
+  transition: border-color var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard),
+              transform var(--duration-fast) var(--ease-standard);
+}
+
+.caseStudyLink:hover {
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+  transform: translateY(-2px);
+}
+
+.iconLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border-current);
+  border-radius: 50%;
+  color: var(--text-primary);
+  transition: border-color var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard),
+              transform var(--duration-fast) var(--ease-standard);
+}
+
+.iconLink:hover {
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+  transform: translateY(-2px);
+}
+
+.footerNote {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.inlineLink {
+  color: var(--text-primary);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.inlineLink:hover {
+  color: var(--accent-red);
+}
+
+/* RESPONSIVE BEHAVIOR */
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+@media (max-width: 767px) {
+  .headerSection {
+    padding-top: 140px;
+    padding-bottom: 70px;
+  }
+
+  .title {
+    font-size: 2.75rem;
+  }
+
+  .subline {
+    font-size: 1.05rem;
+  }
+
+  .projectName {
+    font-size: 1.4rem;
+  }
+}

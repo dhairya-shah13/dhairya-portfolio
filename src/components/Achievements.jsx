@@ -1,20 +1,8 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Trophy, ExternalLink } from 'lucide-react';
+import { achievementsData } from '../data/siteContent.js';
 import styles from './Achievements.module.css';
-
-const achievementsData = [
-  {
-    title: "Winner — Coder's Arcade",
-    description: "First place in the competitive coding event testing algorithms, data structures, and problem-solving speed.",
-    link: 'https://drive.google.com/file/d/1RKbojVUY9XMGcVzAysu-Oxscl_6k_2Ag/view?usp=drive_link'
-  },
-  {
-    title: "Equal Opportunity Cell — Poster Making Event",
-    description: "Awarded recognition for creative graphic design and messaging promoting equality and accessibility.",
-    link: 'https://drive.google.com/file/d/1ZQU-2qtGBc-KI9nF12QQkcs7xpLcL6h6/view?usp=drive_link'
-  }
-];
 
 function Achievements() {
   const containerVariants = {

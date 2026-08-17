@@ -1,43 +1,8 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ExternalLink, Award, GraduationCap } from 'lucide-react';
+import { educationData, certificationsData } from '../data/siteContent.js';
 import styles from './Education.module.css';
-
-const educationData = [
-  {
-    period: 'Ongoing',
-    detail: 'B.Tech, Information Technology',
-    institution: 'Charotar University of Science and Technology (CHARUSAT)',
-    note: '5th Semester · CGPA 7.5/10'
-  },
-  {
-    period: '—',
-    detail: 'Higher Secondary Certificate (Class XII)',
-    institution: 'Seventh Day Adventist Higher Secondary School',
-    note: '94%'
-  },
-  {
-    period: '—',
-    detail: 'Secondary School Certificate (Class X)',
-    institution: 'Divine Gurukulam',
-    note: '92%'
-  }
-];
-
-const certificationsData = [
-  {
-    name: 'Microsoft Azure AI Fundamentals (AI-900) Exam Prep',
-    link: 'https://drive.google.com/file/d/1Gie3IFLzNG0VFVr5YIQ-7u_HkH3bo7uO/view?usp=drive_link'
-  },
-  {
-    name: 'Core Java Certificate',
-    link: 'https://drive.google.com/file/d/1dNBnz-2SglwnQynxwL-NpWjcND2GEGt1/view?usp=drive_link'
-  },
-  {
-    name: 'Advanced SQLite Queries with Belkasoft',
-    link: 'https://drive.google.com/file/d/18x-Om5JWlMEEG1x_fNP3Vrcd_nFHdSfK/view?usp=drive_link'
-  }
-];
 
 function Education() {
   const containerVariants = {

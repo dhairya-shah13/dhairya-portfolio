@@ -7,6 +7,7 @@ import styles from './Contact.module.css';
 function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [mailtoUrl, setMailtoUrl] = useState('');
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -15,12 +16,18 @@ function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.name && formData.email && formData.message) {
-      // Simulate form submission
+      // The contact form is client-side only (no delivery backend), so nothing
+      // is actually sent from the server. Compose a prefilled email the visitor
+      // can send from their own email client instead — the UI must not claim a
+      // message was delivered.
+      const subject = encodeURIComponent(`Message from ${formData.name} (${formData.email}) via aboutdhairya.me`);
+      const body = encodeURIComponent(`${formData.message}\n\n— ${formData.name}\n${formData.email}`);
+      setMailtoUrl(`mailto:shah.dhairya.p13@gmail.com?subject=${subject}&body=${body}`);
       setSubmitted(true);
       setTimeout(() => {
         setFormData({ name: '', email: '', message: '' });
         setSubmitted(false);
-      }, 3000);
+      }, 10000);
     }
   };
 
@@ -40,9 +47,17 @@ function Contact() {
             <h3 className={styles.formTitle}>Send a Message</h3>
             
             {submitted ? (
-              <div className={styles.successMessage}>
+              <div className={styles.successMessage} role="status">
                 <span className={styles.successDot}></span>
-                <p>Thank you! Your message has been sent successfully.</p>
+                <p className={styles.successTitle}>Thanks, {formData.name || 'there'}!</p>
+                <p className={styles.successText}>
+                  This demo form doesn&apos;t send messages from the site yet. Your message is
+                  ready to send from your own email app — use the button below, or email me
+                  directly at shah.dhairya.p13@gmail.com.
+                </p>
+                <a href={mailtoUrl} className={styles.emailBtn}>
+                  Send via Email
+                </a>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className={styles.form}>
@@ -103,7 +118,7 @@ function Contact() {
           >
             {/* Grayscale Dim Portrait background */}
             <div className={styles.portraitBackground}>
-              <img src={dhairyaPhoto} alt="Dhairya Portrait" className={styles.portraitImg} />
+              <img src={dhairyaPhoto} alt="Portrait of Dhairya Shah" className={styles.portraitImg} loading="lazy" width={640} height={640} />
               <div className={styles.overlay}></div>
             </div>
 

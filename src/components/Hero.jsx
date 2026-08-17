@@ -96,7 +96,14 @@ function Hero() {
             
             {/* The main photo frame */}
             <div className={styles.photoFrame}>
-              <img src={dhairyaPhoto} alt="Dhairya Shah Portrait" className={styles.profileImg} />
+              <img
+                src={dhairyaPhoto}
+                alt="Portrait of Dhairya Shah"
+                className={styles.profileImg}
+                width={640}
+                height={640}
+                fetchpriority="high"
+              />
               
               {/* Floating DS Monogram circular badge */}
               <div className={styles.monogramBadge}>

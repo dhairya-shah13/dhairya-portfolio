@@ -1,35 +1,21 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Terminal, Cpu, Database, Cloud, FileCode, CheckCircle2 } from 'lucide-react';
+import { skillsData } from '../data/siteContent.js';
 import styles from './Skills.module.css';
 
-const skillsData = [
-  {
-    category: 'Languages',
-    icon: <FileCode size={20} />,
-    items: ['Python', 'Java', 'Kotlin', 'JavaScript', 'C', 'C++']
-  },
-  {
-    category: 'Frameworks & Libraries',
-    icon: <Cpu size={20} />,
-    items: ['React.js', 'Node.js', 'Express.js', 'Django', 'Flask', 'RESTful APIs']
-  },
-  {
-    category: 'Frontend Development',
-    icon: <Terminal size={20} />,
-    items: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'CSS Modules']
-  },
-  {
-    category: 'Databases',
-    icon: <Database size={20} />,
-    items: ['SQL', 'MongoDB', 'Schema Design', 'Query Optimization']
-  },
-  {
-    category: 'Cloud & DevOps',
-    icon: <Cloud size={20} />,
-    items: ['Docker', 'CI/CD (GitHub Actions)', 'Linux/Shell Scripting', 'Git / GitHub', 'Hostinger VPS']
-  }
-];
+const categoryIcons = {
+  Languages: <FileCode size={20} />,
+  'Frameworks & Libraries': <Cpu size={20} />,
+  'Frontend Development': <Terminal size={20} />,
+  Databases: <Database size={20} />,
+  'Cloud & DevOps': <Cloud size={20} />,
+};
+
+const enrichedSkills = skillsData.map((group) => ({
+  ...group,
+  icon: categoryIcons[group.category] || <Terminal size={20} />,
+}));
 
 function Skills() {
   const containerVariants = {
@@ -65,7 +51,7 @@ function Skills() {
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
         >
-          {skillsData.map((skillGroup, idx) => (
+          {enrichedSkills.map((skillGroup, idx) => (
             <motion.div 
               key={idx} 
               className={styles.skillCard}

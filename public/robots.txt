@@ -1,0 +1,5 @@
+# robots.txt — crawl guidance only. This is NOT a security or rate-limiting mechanism.
+User-agent: *
+Allow: /
+
+Sitemap: https://www.aboutdhairya.me/sitemap.xml

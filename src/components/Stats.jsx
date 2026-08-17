@@ -1,25 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { statsData } from '../data/siteContent.js';
 import styles from './Stats.module.css';
-
-const statsData = [
-  {
-    value: '6',
-    label: 'Live products shipped end-to-end'
-  },
-  {
-    value: '2',
-    label: 'Engineering teams led simultaneously'
-  },
-  {
-    value: '30',
-    label: 'Person organization served company-wide'
-  },
-  {
-    value: '6+',
-    label: 'Languages across the stack'
-  }
-];
 
 function Stats() {
   const containerVariants = {
