@@ -11,7 +11,7 @@ const port = Number(process.argv[2] || 4199);
 const root = join(process.cwd(), 'dist');
 
 const CSP =
-  "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'";
+  "default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.g.doubleclick.net; frame-ancestors 'none'; base-uri 'self'; form-action 'self'";
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',

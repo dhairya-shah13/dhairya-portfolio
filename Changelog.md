@@ -1,5 +1,11 @@
 # Changelog
 
+## [2026-08-18 21:22]
+
+### [Category: SEO] — Added Google Analytics (gtag.js) Tag to All Pages
+What changed: Pasted the Google Analytics tag script (gtag.js) in `index.html` and `public/404.html`. Updated the Content-Security-Policy (CSP) in `vercel.json` and `scripts/serve-verify.mjs` to permit Google Analytics scripts, network connections (connect-src), and tracking pixels (img-src).
+Why: User requested tracking integration across all pages while keeping the project's strict security settings intact.
+
 ## [2026-08-17 23:30]
 
 ### [Category: Security] — Critical CSP fix: externalized SSG inline scripts

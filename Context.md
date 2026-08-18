@@ -13,9 +13,9 @@ Dhairya Shah Portfolio website project.
 - **Meta/head:** `Seo` component (title/description/canonical/OG/Twitter per route) via vite-react-ssg `<Head>`; JSON-LD via `JsonLd` component
 
 ## Folder and File Structure
-- `index.html` — Entry HTML: favicon, canonical, OG defaults, Google Fonts
+- `index.html` — Entry HTML: favicon, canonical, OG defaults, Google Fonts, Google Analytics (gtag.js)
 - `package.json` — scripts: `dev` (vite CSR), `build` (vite-react-ssg build), `preview`, `generate:og`, `optimize:images`
-- `vercel.json` — Security headers (CSP, HSTS, nosniff, Referrer-Policy, Permissions-Policy, frame protection), edge caching (immutable `/assets/*`, robots/sitemap, og-image/resume), CORS restricted to canonical origin. **No `rateLimit` property** — rate limiting is a Vercel Firewall dashboard rule (see final report; REQUIRED manual pre-production step).
+- `vercel.json` — Security headers (CSP allowing self and Google Analytics/Tag Manager domains for tracking, HSTS, nosniff, Referrer-Policy, Permissions-Policy, frame protection), edge caching (immutable `/assets/*`, robots/sitemap, og-image/resume), CORS restricted to canonical origin. **No `rateLimit` property** — rate limiting is a Vercel Firewall dashboard rule (see final report; REQUIRED manual pre-production step).
 - `Context.md`, `Changelog.md` — shared operating docs (this file)
 - `implementationplan.md` — Approved SEO/GEO/AEO implementation plan (v2, with the final baseline-derived rate-limit revision)
 - `public/` — Static files: `robots.txt`, `sitemap.xml` (7 canonical URLs, no lastmod), `404.html`, `favicon.svg`, `og-image.png` (1200×630), `images/dhairya-shah.jpg` (stable portrait URL), `resume/dhairya-shah-resume.pdf` (moved from repo root)  - `scripts/` — `generate-og-image.mjs`, `optimize-images.mjs`, `externalize-ssg-scripts.mjs` (post-build: moves SSG inline hydration scripts to content-hashed /assets/ files so the strict CSP doesn't block them), `serve-verify.mjs` (local production-equivalent server with vercel.json headers + real 404 for pre-deploy verification), `verify-render.mjs` (real-browser hydration/console check), `verify-ux.mjs` (nav/menu/404/overflow/hash-nav checks), `verify-contact.mjs` (contact form truthfulness)
