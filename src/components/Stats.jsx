@@ -1,7 +1,38 @@
-import React from 'react';
-import { motion } from 'motion/react';
+import React, { useEffect, useState, useRef } from 'react';
+import { motion, useInView, animate } from 'motion/react';
 import { statsData } from '../data/siteContent.js';
 import styles from './Stats.module.css';
+
+function Counter({ value }) {
+  const [displayValue, setDisplayValue] = useState('0');
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    const match = value.match(/^(\d+)(.*)$/);
+    if (!match) {
+      setDisplayValue(value);
+      return;
+    }
+
+    const numericValue = parseInt(match[1], 10);
+    const suffix = match[2];
+
+    const controls = animate(0, numericValue, {
+      duration: 1.8,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: (latest) => {
+        setDisplayValue(Math.floor(latest).toString() + suffix);
+      }
+    });
+
+    return () => controls.stop();
+  }, [value, isInView]);
+
+  return <span ref={ref}>{displayValue}</span>;
+}
 
 function Stats() {
   const containerVariants = {
@@ -14,11 +45,16 @@ function Stats() {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, scale: 0.75, y: 15 },
     show: { 
       opacity: 1, 
+      scale: 1,
       y: 0,
-      transition: { duration: 0.5, ease: 'easeOut' }
+      transition: { 
+        type: "spring",
+        stiffness: 90,
+        damping: 11
+      }
     }
   };
 
@@ -38,7 +74,9 @@ function Stats() {
               className={styles.statBox}
               variants={itemVariants}
             >
-              <span className={`${styles.value} numeral`}>{stat.value}</span>
+              <span className={`${styles.value} numeral`}>
+                <Counter value={stat.value} />
+              </span>
               <p className={styles.label}>{stat.label}</p>
             </motion.div>
           ))}

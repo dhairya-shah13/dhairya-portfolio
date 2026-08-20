@@ -15,11 +15,13 @@ function Achievements() {
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 40, skewY: 2, rotate: -1 },
     show: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.5, ease: 'easeOut' }
+      skewY: 0,
+      rotate: 0,
+      transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] }
     }
   };
 

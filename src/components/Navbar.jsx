@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Github, Linkedin } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 import styles from './Navbar.module.css';
+import Magnetic from './Magnetic.jsx';
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -57,7 +59,12 @@ function Navbar() {
     e.preventDefault();
     closeMenu();
     if (location.pathname === '/') {
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+      const el = document.getElementById(id);
+      if (window.lenis && el) {
+        window.lenis.scrollTo(el, { offset: -90 });
+      } else if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
     } else {
       navigate(`/#${id}`);
     }
@@ -67,9 +74,11 @@ function Navbar() {
     <>
       <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
         <div className={styles.container}>
-          <Link to="/" className={styles.logo}>
-            Dhairya<span className="text-accent">˙</span>
-          </Link>
+          <Magnetic>
+            <Link to="/" className={styles.logo}>
+              Dhairya<span className="text-accent">˙</span>
+            </Link>
+          </Magnetic>
 
           <nav className={styles.desktopNav} aria-label="Primary">
             <Link to="/about" className={styles.navLink}>
@@ -86,70 +95,149 @@ function Navbar() {
             </a>
           </nav>
 
-          <button
-            ref={hamburgerRef}
-            className={styles.hamburgerBtn}
-            onClick={toggleMenu}
-            aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-menu"
-            id="hamburger-menu-btn"
-          >
-            {menuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          <Magnetic>
+            <button
+              ref={hamburgerRef}
+              className={styles.hamburgerBtn}
+              onClick={toggleMenu}
+              aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
+              id="hamburger-menu-btn"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <motion.path
+                  variants={{
+                    closed: { d: "M 3 6 L 21 6" },
+                    open: { d: "M 4 20 L 20 4" }
+                  }}
+                  animate={menuOpen ? "open" : "closed"}
+                  transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+                />
+                <motion.path
+                  d="M 3 12 L 21 12"
+                  variants={{
+                    closed: { opacity: 1 },
+                    open: { opacity: 0 }
+                  }}
+                  animate={menuOpen ? "open" : "closed"}
+                  transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
+                />
+                <motion.path
+                  variants={{
+                    closed: { d: "M 3 18 L 21 18" },
+                    open: { d: "M 4 4 L 20 20" }
+                  }}
+                  animate={menuOpen ? "open" : "closed"}
+                  transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+                />
+              </svg>
+            </button>
+          </Magnetic>
         </div>
       </header>
 
       {/* Full-Screen Overlay Mobile Menu */}
-      <div
-        id="mobile-menu"
-        className={`${styles.menuOverlay} ${menuOpen ? styles.menuOpen : ''}`}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Navigation menu"
-      >
-        <button
-          ref={closeBtnRef}
-          className={styles.closeBtn}
-          onClick={toggleMenu}
-          aria-label="Close navigation menu"
-          id="close-menu-btn"
-        >
-          <X size={24} />
-        </button>
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            id="mobile-menu"
+            className={styles.menuOverlay}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {/* Animated decorative gradient background mesh blobs */}
+            <div className={styles.glowBlob1}></div>
+            <div className={styles.glowBlob2}></div>
 
-        <div className={styles.overlayContent}>
-          <nav className={styles.mobileNav} aria-label="Mobile">
-            <Link to="/" className={styles.mobileNavLink}>
-              Home
-            </Link>
-            <Link to="/about" className={styles.mobileNavLink}>
-              About
-            </Link>
-            <Link to="/projects" className={styles.mobileNavLink}>
-              Projects
-            </Link>
-            <a href="#skills" onClick={(e) => goToSection(e, 'skills')} className={styles.mobileNavLink}>
-              Skills
-            </a>
-            <a href="#contact" onClick={(e) => goToSection(e, 'contact')} className={styles.mobileNavLink}>
-              Contact
-            </a>
-          </nav>
+            <button
+              ref={closeBtnRef}
+              className={styles.closeBtn}
+              onClick={toggleMenu}
+              aria-label="Close navigation menu"
+              id="close-menu-btn"
+            >
+              <X size={24} />
+            </button>
 
-          <div className={styles.overlayFooter}>
-            <div className={styles.socials}>
-              <a href="https://github.com/dhairya-shah13" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <Github size={24} />
-              </a>
-              <a href="https://linkedin.com/in/dhairya-shah13" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                <Linkedin size={24} />
-              </a>
+            <div className={styles.overlayContent}>
+              <motion.nav 
+                className={styles.mobileNav} 
+                aria-label="Mobile"
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  hidden: {},
+                  visible: {
+                    transition: {
+                      staggerChildren: 0.05,
+                      delayChildren: 0.1
+                    }
+                  }
+                }}
+              >
+                {[
+                  { to: '/', label: 'Home', isLink: true },
+                  { to: '/about', label: 'About', isLink: true },
+                  { to: '/projects', label: 'Projects', isLink: true },
+                  { to: 'skills', label: 'Skills', isLink: false },
+                  { to: 'contact', label: 'Contact', isLink: false }
+                ].map((item, idx) => {
+                  const linkVariants = {
+                    hidden: { opacity: 0, x: 50, skewX: 10 },
+                    visible: { 
+                      opacity: 1, 
+                      x: 0, 
+                      skewX: 0,
+                      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } 
+                    }
+                  };
+
+                  return (
+                    <motion.div key={idx} variants={linkVariants} style={{ overflow: 'hidden' }}>
+                      {item.isLink ? (
+                        <Link to={item.to} className={styles.mobileNavLink}>
+                          {item.label}
+                        </Link>
+                      ) : (
+                        <a href={`#${item.to}`} onClick={(e) => goToSection(e, item.to)} className={styles.mobileNavLink}>
+                          {item.label}
+                        </a>
+                      )}
+                    </motion.div>
+                  );
+                })}
+              </motion.nav>
+
+              <motion.div 
+                className={styles.overlayFooter}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div className={styles.socials}>
+                  <Magnetic>
+                    <a href="https://github.com/dhairya-shah13" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                      <Github size={24} />
+                    </a>
+                  </Magnetic>
+                  <Magnetic>
+                    <a href="https://linkedin.com/in/dhairya-shah13" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                      <Linkedin size={24} />
+                    </a>
+                  </Magnetic>
+                </div>
+                <p className={styles.copyright}>© 2026 Dhairya Shah. All rights reserved.</p>
+              </motion.div>
             </div>
-            <p className={styles.copyright}>© 2026 Dhairya Shah. All rights reserved.</p>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

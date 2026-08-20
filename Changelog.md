@@ -1,5 +1,31 @@
 # Changelog
 
+## [2026-08-20 12:32]
+
+### [Category: UI] — Custom Motion, Smooth Scroll, and Animated Hamburger Button
+What changed:
+- Installed `lenis` and created `src/components/SmoothScroll.jsx` wrapper component. Wrapped the application layout shell to provide inertial smooth-scrolling globally, integrated with pathname/hash changes and disabled when `prefers-reduced-motion` is detected.
+- Swapped static Lucide hamburger icons in `Navbar.jsx` with a custom animated SVG component using Framer Motion path morph variants (closed to open) for smooth transitioning bars.
+- Enhanced viewport reveals on all homepage sections in `src/components/` (Hero, Intro, FeaturedWork, About, FocusAreas, Experience, Stats, Skills, Cta, Education, Achievements, and Contact) with unique, hardware-composited, staggered entry configurations (like clip paths, rotational skewing, perspective flip-ups, spring scale overshoots, and timeline progressions).
+- Updated internal navigation listeners to call `window.lenis.scrollTo(...)` for smooth in-page routing.
+Why: Satisfied user requests for a premium, highly responsive scroll experience and interactive hamburger element while maintaining accessibility guidelines.
+
+### [Category: UI] — Awwwards-Grade Motion & Interactive Details
+What changed:
+- Added interactive cursor-tracking spotlight mesh glows in `Hero.jsx` and `Cta.jsx` using high-performance CSS custom variables.
+- Programmed a custom `Counter` count-up stat reveal engine in `Stats.jsx` using Framer Motion's `animate` function.
+- Implemented word-by-word staggered mask text typography reveals on Hero and CTA headers.
+- Programmed 3D coordinate-tracking card tilt hovers with separate parallax Z-depth layers on `FeaturedWork.jsx` and `FocusAreas.jsx` cards.
+- Upgraded full-screen mobile navigation overlay in `Navbar.jsx` with glassmorphic backdrop-blur, staggered links with custom skews, and slowly moving background gradient blobs.
+Why: Satisfied user requirements for premium, highly engaging and eye-catching visual effects.
+
+### [Category: UI] — Tech Marquee, Magnetic Buttons, and Reverted Grid Layout
+What changed:
+- Coded reusable `<Magnetic>` wrapper component using Framer Motion springs to snap targets (Logo, mobile Hamburger button, CTA links, social icons) toward the user's cursor inside a radius.
+- Re-architected infinite scrolling text marquee component `<Marquee />` using `translateX(-50%)` scroll translation on the parent track, ensuring mathematically seamless endless loops.
+- Reverted desktop horizontal scroll project layouts in `FeaturedWork.jsx` / `FeaturedWork.module.css` back to a clean vertical grid container, maintaining cards' 3D coordinate-tracking tilt hovers.
+Why: Satisfied user request to simplify scroll hijacking while optimizing outline ticker animations.
+
 ## [2026-08-18 21:22]
 
 ### [Category: SEO] — Added Google Analytics (gtag.js) Tag to All Pages

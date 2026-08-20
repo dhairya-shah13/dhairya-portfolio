@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Seo from '../components/Seo.jsx';
 import JsonLd from '../components/JsonLd.jsx';
 import Hero from '../components/Hero.jsx';
+import Marquee from '../components/Marquee.jsx';
 import Intro from '../components/Intro.jsx';
 import FeaturedWork from '../components/FeaturedWork.jsx';
 import About from '../components/About.jsx';
@@ -38,6 +39,7 @@ function HomePage() {
       <JsonLd data={buildProfilePageSchema('/')} />
 
       <Hero />
+      <Marquee />
       <Intro />
       <FeaturedWork />
       <About />

@@ -61,10 +61,19 @@ Dhairya Shah Portfolio website project.
 ## UI/Motion
 - Chosen foundation: React, Vite, CSS, Framer Motion (`motion/react`).
 - Colors: Off-white (`#F5F4F1`) and dark (`#0A0A0A`) section background alternating rhythm.
-- Red accent (`#EF4444`) used carefully for interactive highlights and highlights.
+- Red accent (`#EF4444`) used carefully for interactive highlights.
 - Motion budget: Interactive marketing site. High polish, fast transitions, clear user triggers.
 - Transitions: `--duration-fast` 150ms hovers, `--duration-base` 250ms reveals/menus, `--duration-slow` 400ms larger slides, `--duration-page` 600ms hero.
-- Reduced motion: global `MotionConfig reducedMotion="user"` + CSS media query + Preloader skip (post-hydration, to avoid hydration mismatch).
+- Smooth scroll: Lenis integration globally (under `SmoothScroll` component), disabled for reduced-motion users and mapped to Navbar section scroll-targets.
+- Section entrance reveals: Viewport-triggered unique animations per section (staggered word-by-word masked text reveals on Hero/CTA, 3D rotational skew on Intro, 3D perspective flip on FeaturedWork, horizontal slide split on About, spring overshoot scales on FocusAreas/Stats, timeline Briefcase spring scale and card slide on Experience, staggered text-skew rows on Achievements, and staggered input fields slide on Contact).
+- Custom animated hamburger: Vector path morphs from 3-line burger into an "X" shape utilizing SVG `<motion.path>` states.
+- Interactive Spotlights: Cursor-aware radial glowing meshes in Hero and CTA backgrounds (updates CSS variables, bypassing React renders).
+- Dynamic Counters: CountUp animation component in Stats section tracking number bounds on view.
+- 3D Tilts & Parallax: Cursor-coordinate mapping tilts with distinct Z-depth parallax layering inside FeaturedWork and FocusAreas cards.
+- Mobile Overlay: Full-screen glassmorphism overlay menu with staggered links and slowly floating, animated background gradient blobs.
+- Magnetic buttons: Custom `<Magnetic>` wrapper snaps buttons, links, and social elements toward the user's cursor inside a set radius using Framer Motion springs.
+- Infinite tech stack marquee: Seamlessly looping running outline text ticker positioned directly beneath the Hero section.
+- Reduced motion: global `MotionConfig reducedMotion="user"` + CSS media query + Preloader skip (post-hydration, to avoid hydration mismatch). Disable Lenis layout transitions if user prefers reduced motion.
 
 ## Known Limitations
 - Contact form remains client-side simulated (no delivery backend) — the UI is now truthful about this and offers a prefilled mailto fallback; a real backend is a separate project.

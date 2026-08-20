@@ -16,20 +16,26 @@ function Experience() {
         </div>
 
         <div className={styles.timeline}>
-          <motion.div 
-            className={styles.timelineItem}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {/* Timeline node dot */}
-            <div className={styles.timelineDot}>
+          <div className={styles.timelineItem}>
+            {/* Timeline node dot with spring scaling */}
+            <motion.div 
+              className={styles.timelineDot}
+              initial={{ scale: 0, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ type: "spring", stiffness: 100, damping: 12, delay: 0.1 }}
+            >
               <Briefcase size={16} color="#FFFFFF" />
-            </div>
+            </motion.div>
 
             {/* Main timeline content card */}
-            <div className={styles.card}>
+            <motion.div 
+              className={styles.card}
+              initial={{ opacity: 0, x: 50, scale: 0.97 }}
+              whileInView={{ opacity: 1, x: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+            >
               <div className={styles.cardHeader}>
                 <div className={styles.titleGroup}>
                   <h3 className={styles.role}>{experienceData.role}</h3>
@@ -53,18 +59,18 @@ function Experience() {
                   <motion.li 
                     key={idx} 
                     className={styles.bulletItem}
-                    initial={{ opacity: 0, x: -10 }}
+                    initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: idx * 0.08 }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.3 + idx * 0.08 }}
                   >
                     <span className={styles.bulletDot}></span>
                     <span className={styles.bulletText}>{item}</span>
                   </motion.li>
                 ))}
               </ul>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

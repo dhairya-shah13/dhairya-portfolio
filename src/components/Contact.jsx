@@ -31,6 +31,25 @@ function Contact() {
     }
   };
 
+  const formContainerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const formFieldVariants = {
+    hidden: { opacity: 0, y: 15 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] }
+    }
+  };
+
   return (
     <section id="contact" className="section-dark section-padding">
       <div className="container">
@@ -39,10 +58,10 @@ function Contact() {
           {/* Left Column: Form Card */}
           <motion.div 
             className={styles.formCard}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
           >
             <h3 className={styles.formTitle}>Send a Message</h3>
             
@@ -60,8 +79,15 @@ function Contact() {
                 </a>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className={styles.form}>
-                <div className={styles.inputGroup}>
+              <motion.form 
+                onSubmit={handleSubmit} 
+                className={styles.form}
+                variants={formContainerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+              >
+                <motion.div className={styles.inputGroup} variants={formFieldVariants}>
                   <label htmlFor="name" className={styles.label}>Name</label>
                   <input 
                     type="text" 
@@ -72,9 +98,9 @@ function Contact() {
                     placeholder="Enter your name" 
                     required 
                   />
-                </div>
+                </motion.div>
                 
-                <div className={styles.inputGroup}>
+                <motion.div className={styles.inputGroup} variants={formFieldVariants}>
                   <label htmlFor="email" className={styles.label}>Email Address</label>
                   <input 
                     type="email" 
@@ -85,9 +111,9 @@ function Contact() {
                     placeholder="name@example.com" 
                     required 
                   />
-                </div>
+                </motion.div>
                 
-                <div className={styles.inputGroup}>
+                <motion.div className={styles.inputGroup} variants={formFieldVariants}>
                   <label htmlFor="message" className={styles.label}>Message</label>
                   <textarea 
                     id="message" 
@@ -98,23 +124,23 @@ function Contact() {
                     placeholder="Describe your project or role..." 
                     required
                   ></textarea>
-                </div>
+                </motion.div>
 
-                <button type="submit" className={styles.submitBtn}>
+                <motion.button type="submit" className={styles.submitBtn} variants={formFieldVariants}>
                   Submit Message
                   <Send size={16} className={styles.submitIcon} />
-                </button>
-              </form>
+                </motion.button>
+              </motion.form>
             )}
           </motion.div>
 
           {/* Right Column: Contact Info Over Portrait */}
           <motion.div 
             className={styles.infoColumn}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: 50, scale: 0.96 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
           >
             {/* Grayscale Dim Portrait background */}
             <div className={styles.portraitBackground}>

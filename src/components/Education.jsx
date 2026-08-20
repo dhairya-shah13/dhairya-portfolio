@@ -15,11 +15,11 @@ function Education() {
   };
 
   const rowVariants = {
-    hidden: { opacity: 0, y: 15 },
+    hidden: { opacity: 0, y: 20 },
     show: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.5, ease: 'easeOut' }
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
     }
   };
 
@@ -29,7 +29,13 @@ function Education() {
         <div className={styles.grid}>
           
           {/* Education Sub-Section */}
-          <div className={styles.column}>
+          <motion.div 
+            className={styles.column}
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
             <div className={styles.header}>
               <GraduationCap size={24} className={styles.sectionIcon} />
               <h2 className={styles.title}>Education</h2>
@@ -57,10 +63,16 @@ function Education() {
                 </motion.div>
               ))}
             </motion.div>
-          </div>
+          </motion.div>
 
           {/* Certifications Sub-Section */}
-          <div className={styles.column}>
+          <motion.div 
+            className={styles.column}
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+          >
             <div className={styles.header}>
               <Award size={24} className={styles.sectionIcon} />
               <h2 className={styles.title}>Certifications</h2>
@@ -91,7 +103,7 @@ function Education() {
                 </motion.a>
               ))}
             </motion.div>
-          </div>
+          </motion.div>
 
         </div>
       </div>

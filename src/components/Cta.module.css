@@ -4,6 +4,27 @@
   align-items: center;
   text-align: center;
   padding: 40px 0;
+  position: relative;
+  overflow: hidden;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+}
+
+.wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(239, 68, 68, 0.1), transparent 80%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.title, .subline {
+  position: relative;
+  z-index: 2;
 }
 
 .title {
@@ -24,6 +45,8 @@
 }
 
 .ctaButton {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   gap: 10px;

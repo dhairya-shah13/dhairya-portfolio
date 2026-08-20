@@ -28,11 +28,13 @@ function Skills() {
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 50, rotate: -2, scale: 0.96 },
     show: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+      rotate: 0,
+      scale: 1,
+      transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] }
     }
   };
 

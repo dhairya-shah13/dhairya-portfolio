@@ -4,6 +4,36 @@ import dhairyaPhoto from '../assets/dhairya.jpeg';
 import styles from './About.module.css';
 
 function About() {
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.08
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: 40, y: 15 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] }
+    }
+  };
+
+  const photoVariants = {
+    hidden: { opacity: 0, x: -60, scale: 0.94, rotate: -3 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      rotate: 0,
+      transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] }
+    }
+  };
+
   return (
     <section id="about" className="section-light section-padding" style={{ borderTop: '1px solid var(--border-current)' }}>
       <div className="container">
@@ -11,10 +41,10 @@ function About() {
           {/* Framed Photo Column */}
           <motion.div 
             className={styles.photoColumn}
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            variants={photoVariants}
           >
             <div className={styles.photoFrame}>
               <img src={dhairyaPhoto} alt="Dhairya Shah Profile Photo" className={styles.profileImg} />
@@ -28,28 +58,28 @@ function About() {
             </div>
           </motion.div>
 
-          {/* Narrative Narrative Column */}
+          {/* Narrative Column */}
           <motion.div 
             className={styles.narrativeColumn}
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
           >
-            <p className={styles.eyebrow}>The Narrative</p>
-            <h2 className={styles.mainTitle}>
+            <motion.p className={styles.eyebrow} variants={itemVariants}>The Narrative</motion.p>
+            <motion.h2 className={styles.mainTitle} variants={itemVariants}>
               Combining Software Architecture with Cloud Readiness
-            </h2>
+            </motion.h2>
             <div className={styles.bioContent}>
-              <p className={styles.paragraph}>
+              <motion.p className={styles.paragraph} variants={itemVariants}>
                 Proficient across the MERN stack (MongoDB, Express, React, Node.js) and Python-based frameworks like Django and Flask. I build robust back-end systems and fluid, responsive front-end interfaces, ensuring tight API contracts and seamless data synchronization.
-              </p>
-              <p className={styles.paragraph}>
+              </motion.p>
+              <motion.p className={styles.paragraph} variants={itemVariants}>
                 My engineering focus is heavily oriented toward infrastructure management. I leverage Docker for service containerization, set up automated CI/CD deployment pipelines (GitHub Actions), and author Linux shell scripts to provision and manage VPS hosts (Hostinger).
-              </p>
-              <p className={styles.paragraph}>
+              </motion.p>
+              <motion.p className={styles.paragraph} variants={itemVariants}>
                 As a project leader, I've managed source control and coordinated collaborative team workflows via Git/GitHub, taking multiple concurrent software products from initial concept to company-wide production use.
-              </p>
+              </motion.p>
             </div>
           </motion.div>
         </div>

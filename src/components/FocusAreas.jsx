@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import React, { useState, useRef } from 'react';
+import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from 'motion/react';
 import { focusAreasData as baseFocusAreas } from '../data/siteContent.js';
 import styles from './FocusAreas.module.css';
 
@@ -17,14 +17,83 @@ const focusAreasData = baseFocusAreas.map((item, index) => ({
 
 function FocusAreas() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const panelCardRef = useRef(null);
+
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  // Smooth springs for rotation
+  const rotateX = useSpring(useTransform(y, [-200, 200], [8, -8]), { stiffness: 120, damping: 20 });
+  const rotateY = useSpring(useTransform(x, [-200, 200], [-8, 8]), { stiffness: 120, damping: 20 });
+
+  const handleMouseMove = (e) => {
+    const rect = panelCardRef.current?.getBoundingClientRect();
+    if (rect) {
+      const width = rect.width;
+      const height = rect.height;
+      const mouseX = e.clientX - rect.left - width / 2;
+      const mouseY = e.clientY - rect.top - height / 2;
+      x.set(mouseX);
+      y.set(mouseY);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.08
+      }
+    }
+  };
+
+  const headerVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+    }
+  };
+
+  const rowVariants = {
+    hidden: { opacity: 0, x: -30, scale: 0.96 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      transition: { duration: 0.8, type: "spring", stiffness: 70, damping: 13 }
+    }
+  };
+
+  const panelVariants = {
+    hidden: { opacity: 0, x: 40, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      transition: { duration: 0.8, type: "spring", stiffness: 60, damping: 15, delay: 0.15 }
+    }
+  };
 
   return (
     <section id="focus" className="section-dark section-padding">
-      <div className="container">
-        <div className={styles.header}>
+      <motion.div 
+        className="container"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+      >
+        <motion.div className={styles.header} variants={headerVariants}>
           <p className={styles.eyebrow}>Services & Domain</p>
           <h2 className={styles.title}>Core Focus Areas</h2>
-        </div>
+        </motion.div>
 
         <div className={styles.layoutGrid}>
           {/* Left Column: Numbered List */}
@@ -32,11 +101,15 @@ function FocusAreas() {
             {focusAreasData.map((item, index) => {
               const isActive = index === activeIndex;
               return (
-                <div 
+                <motion.div 
                   key={item.id}
                   className={`${styles.row} ${isActive ? styles.rowActive : styles.rowDimmed}`}
-                  onMouseEnter={() => setActiveIndex(index)}
+                  onMouseEnter={() => {
+                    setActiveIndex(index);
+                    handleMouseLeave(); // Reset rotation when card content switches
+                  }}
                   onClick={() => setActiveIndex(index)}
+                  variants={rowVariants}
                 >
                   <div className={styles.rowHeader}>
                     <span className={`${styles.index} numeral`}>{item.id}</span>
@@ -55,23 +128,28 @@ function FocusAreas() {
                       <div className={styles.gridOverlay}></div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
 
           {/* Right Column: Desktop Panel with Switch/Cross-fade */}
-          <div className={styles.desktopPanel}>
+          <motion.div className={styles.desktopPanel} variants={panelVariants}>
             <AnimatePresence mode="wait">
               <motion.div 
+                ref={panelCardRef}
                 key={activeIndex}
                 className={styles.panelCard}
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -15 }}
                 transition={{ duration: 0.25, ease: 'easeOut' }}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+                style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+                whileHover={{ scale: 1.02 }}
               >
-                <div className={styles.gradientVisual}>
+                <div className={styles.gradientVisual} style={{ transform: "translateZ(30px)" }}>
                   <img 
                     src={focusAreasData[activeIndex].image} 
                     alt={focusAreasData[activeIndex].title} 
@@ -80,14 +158,14 @@ function FocusAreas() {
                   <div className={styles.gridOverlay}></div>
                 </div>
                 
-                <p className={styles.panelDescription}>
+                <p className={styles.panelDescription} style={{ transform: "translateZ(15px)" }}>
                   {focusAreasData[activeIndex].description}
                 </p>
               </motion.div>
             </AnimatePresence>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

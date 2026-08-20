@@ -6,6 +6,20 @@
   overflow: hidden;
   padding-top: 140px;
   padding-bottom: 120px;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+}
+
+.heroSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(239, 68, 68, 0.07), transparent 80%);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .heroContainer {

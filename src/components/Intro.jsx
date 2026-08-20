@@ -8,10 +8,10 @@ function Intro() {
       <div className="container">
         <motion.div
           className={styles.contentWrapper}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 50, rotateX: 10, skewY: 2 }}
+          whileInView={{ opacity: 1, y: 0, rotateX: 0, skewY: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
         >
           <p className={styles.eyebrow}>Projects I'm proud of</p>
 
