@@ -1,24 +1,28 @@
-import React, { useRef } from 'react';
-import { motion } from 'motion/react';
-import { Github, Linkedin, ArrowDown } from 'lucide-react';
-import dhairyaPhoto from '../assets/dhairya.jpeg';
-import styles from './Hero.module.css';
-import Magnetic from './Magnetic.jsx';
+import React, { useRef } from "react";
+import { motion } from "motion/react";
+import { Github, Linkedin, ArrowDown } from "lucide-react";
+import dhairyaPhoto from "../assets/dhairya.jpeg";
+import styles from "./Hero.module.css";
+import Magnetic from "./Magnetic.jsx";
 
 // Helper component to split text into words and wrap in a masked animate container
 function SplitText({ children, variants }) {
-  const words = children.split(' ');
+  const words = children.split(" ");
   return (
     <>
       {words.map((word, i) => (
-        <span key={i} style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom' }}>
-          <motion.span
-            variants={variants}
-            style={{ display: 'inline-block' }}
-          >
+        <span
+          key={i}
+          style={{
+            display: "inline-block",
+            overflow: "hidden",
+            verticalAlign: "bottom",
+          }}
+        >
+          <motion.span variants={variants} style={{ display: "inline-block" }}>
             {word}
           </motion.span>
-          {i < words.length - 1 && '\u00A0'}
+          {i < words.length - 1 && "\u00A0"}
         </span>
       ))}
     </>
@@ -34,19 +38,19 @@ function Hero() {
     if (rect) {
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      heroRef.current.style.setProperty('--mouse-x', `${x}px`);
-      heroRef.current.style.setProperty('--mouse-y', `${y}px`);
+      heroRef.current.style.setProperty("--mouse-x", `${x}px`);
+      heroRef.current.style.setProperty("--mouse-y", `${y}px`);
     }
   };
 
   // Smooth scroll helper using Lenis if available
   const handleScrollClick = (e) => {
     e.preventDefault();
-    const element = document.getElementById('intro');
+    const element = document.getElementById("intro");
     if (window.lenis && element) {
       window.lenis.scrollTo(element, { offset: -90 });
     } else if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -57,9 +61,9 @@ function Hero() {
       opacity: 1,
       transition: {
         staggerChildren: 0.05,
-        delayChildren: 0.1
-      }
-    }
+        delayChildren: 0.1,
+      },
+    },
   };
 
   const badgeVariants = {
@@ -67,8 +71,8 @@ function Hero() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
-    }
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+    },
   };
 
   const titleLineVariants = {
@@ -76,8 +80,8 @@ function Hero() {
     visible: {
       y: 0,
       rotate: 0,
-      transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] }
-    }
+      transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] },
+    },
   };
 
   const sublineVariants = {
@@ -85,8 +89,8 @@ function Hero() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
-    }
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+    },
   };
 
   const blockLeftVariants = {
@@ -95,8 +99,8 @@ function Hero() {
       opacity: 1,
       x: 0,
       scale: 1,
-      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.3 }
-    }
+      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.3 },
+    },
   };
 
   const blockRightVariants = {
@@ -105,8 +109,8 @@ function Hero() {
       opacity: 1,
       x: 0,
       scale: 1,
-      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.4 }
-    }
+      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.4 },
+    },
   };
 
   const photoFrameVariants = {
@@ -115,14 +119,20 @@ function Hero() {
       opacity: 1,
       scale: 1,
       rotate: 0,
-      transition: { duration: 1, type: "spring", stiffness: 60, damping: 15, delay: 0.2 }
-    }
+      transition: {
+        duration: 1,
+        type: "spring",
+        stiffness: 60,
+        damping: 15,
+        delay: 0.2,
+      },
+    },
   };
 
   return (
-    <section 
-      ref={heroRef} 
-      id="hero" 
+    <section
+      ref={heroRef}
+      id="hero"
       className={`section-dark ${styles.heroSection}`}
       onMouseMove={handleMouseMove}
     >
@@ -130,7 +140,7 @@ function Hero() {
       <div className={styles.liquidOrb1} aria-hidden="true" />
       <div className={styles.liquidOrb2} aria-hidden="true" />
 
-      <motion.div 
+      <motion.div
         className={`container ${styles.heroContainer}`}
         variants={containerVariants}
         initial="hidden"
@@ -144,19 +154,34 @@ function Hero() {
           </div>
           <div className={styles.socialLinks}>
             <Magnetic>
-              <a href="https://github.com/dhairya-shah13" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <a
+                href="https://github.com/dhairya-shah13"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+              >
                 <Github size={16} />
               </a>
             </Magnetic>
             <Magnetic>
-              <a href="https://linkedin.com/in/dhairya-shah13" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <a
+                href="https://linkedin.com/in/dhairya-shah13"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+              >
                 <Linkedin size={16} />
               </a>
             </Magnetic>
           </div>
           <Magnetic>
-            <a href="#intro" onClick={handleScrollClick} className={styles.scrollLink}>
-              Scroll to view more <ArrowDown size={14} className={styles.arrowIcon} />
+            <a
+              href="#intro"
+              onClick={handleScrollClick}
+              className={styles.scrollLink}
+            >
+              Scroll to view more{" "}
+              <ArrowDown size={14} className={styles.arrowIcon} />
             </a>
           </Magnetic>
           <span className={styles.yearBadge}>© 2026</span>
@@ -166,19 +191,21 @@ function Hero() {
         <div className={styles.heroGrid}>
           <div className={styles.textBlock}>
             <h1 className={styles.headline}>
-              <span style={{ display: 'block' }}>
+              <span style={{ display: "block" }}>
                 <SplitText variants={titleLineVariants}>Building</SplitText>
               </span>
-              <span style={{ display: 'block' }}>
+              <span style={{ display: "block" }}>
                 <span className={styles.outlineText}>
                   <SplitText variants={titleLineVariants}>Reliable</SplitText>
                 </span>
                 <span> </span>
                 <SplitText variants={titleLineVariants}>Products —</SplitText>
               </span>
-              <span style={{ display: 'block' }}>
+              <span style={{ display: "block" }}>
                 <span className={styles.overlapContainer}>
-                  <SplitText variants={titleLineVariants}>from Database to</SplitText>
+                  <SplitText variants={titleLineVariants}>
+                    from Database to
+                  </SplitText>
                   <span> </span>
                   <span className={styles.accentText}>
                     <SplitText variants={titleLineVariants}>Deployed</SplitText>
@@ -188,26 +215,31 @@ function Hero() {
                 </span>
               </span>
             </h1>
-            
+
             <motion.p className={styles.subline} variants={sublineVariants}>
-              Full-Stack Developer <span className={styles.bullet}>·</span> Cloud & DevOps <span className={styles.bullet}>·</span> Ahmedabad, Gujarat
+              Full-Stack Developer <span className={styles.bullet}>·</span>{" "}
+              Cloud & DevOps <span className={styles.bullet}>·</span> Ahmedabad,
+              Gujarat
             </motion.p>
           </div>
 
           {/* Asymmetric Photo Collage */}
           <div className={styles.collageContainer}>
             {/* Background offset blocks */}
-            <motion.div 
+            <motion.div
               className={`${styles.offsetBlock} ${styles.blockLight}`}
               variants={blockLeftVariants}
             ></motion.div>
-            <motion.div 
+            <motion.div
               className={`${styles.offsetBlock} ${styles.blockDark}`}
               variants={blockRightVariants}
             ></motion.div>
-            
+
             {/* The main photo frame */}
-            <motion.div className={styles.photoFrame} variants={photoFrameVariants}>
+            <motion.div
+              className={styles.photoFrame}
+              variants={photoFrameVariants}
+            >
               <img
                 src={dhairyaPhoto}
                 alt="Portrait of Dhairya Shah"
@@ -216,7 +248,7 @@ function Hero() {
                 height={640}
                 fetchpriority="high"
               />
-              
+
               {/* Floating DS Monogram circular badge */}
               <div className={styles.monogramBadge}>
                 <span className={styles.monogramText}>DS</span>

@@ -1,5 +1,13 @@
 # Changelog
 
+## [2026-08-21 20:50] — Floating Liquid Glass Navbar Capsule Redesign (UISKILL.md)
+**Type:** UI | Navbar | Glassmorphism | Layout | Responsive
+**Page(s):** All pages (Navbar component)
+**Summary:** Redesigned the top navigation bar into a unified floating Liquid Glass capsule (`background: rgba(14, 14, 14, 0.82)`, `backdrop-filter: blur(24px) saturate(190%)`, `border-radius: 100px`, `box-shadow: 0 16px 40px rgba(0,0,0,0.45), inset 0 1px 1px 0 rgba(255,255,255,0.2)`). Fixed underlying page text bleed-through during scrolling, eliminated desktop hamburger duplication (`display: none` on > 900px), and ensured seamless contrast across dark and light sections. Verified 100% hydration and 7/7 UX test passes.
+**Keyword(s) targeted:** Liquid Glass Navbar, Glassmorphic Capsule, UI Refinement
+**Files touched:** `src/components/Navbar.module.css`, `src/components/Hero.jsx`, `Context.md`, `Changelog.md`
+**Audit trigger:** User instruction to ensure navbar has proper glassmorphism without text clashing.
+
 ## [2026-08-21 20:38] — Liquid Glass Design System & Fluid Ambient Depth (UISKILL.md)
 **Type:** UI | Design System | Glassmorphism | Motion | Tokens | Accessibility
 **Page(s):** All pages (`/`, `/about`, `/projects`, `/projects/:slug`, `/blogs`, `/blogs/:slug`)

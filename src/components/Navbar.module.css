@@ -1,86 +1,61 @@
 .header {
   position: fixed;
-  top: 0;
+  top: 16px;
   left: 0;
   right: 0;
   width: 100%;
   z-index: 100;
-  padding: 24px 0;
-  transition: padding var(--duration-base) var(--ease-standard),
-              background-color var(--duration-base) var(--ease-standard),
-              border-color var(--duration-base) var(--ease-standard);
-  background-color: transparent;
-  border-bottom: 1px solid transparent;
-}
-
-.scrolled {
-  padding: 12px 0;
-  background-color: rgba(10, 10, 10, 0.75);
-  backdrop-filter: blur(20px) saturate(180%) contrast(105%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%) contrast(105%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
-}
-
-/* Make sure text is white on the dark navbar */
-.scrolled .logo,
-.scrolled .navLink {
-  color: #FFFFFF;
+  pointer-events: none;
 }
 
 .container {
-  max-width: 1280px;
-  width: 100%;
+  max-width: 1080px;
+  width: calc(100% - 48px);
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 10px 28px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: rgba(14, 14, 14, 0.82);
+  backdrop-filter: blur(24px) saturate(190%) contrast(105%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%) contrast(105%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 100px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), inset 0 1px 1px 0 rgba(255, 255, 255, 0.2);
+  pointer-events: auto;
+  transition: transform var(--duration-base) var(--ease-standard),
+              background var(--duration-base) var(--ease-standard),
+              box-shadow var(--duration-base) var(--ease-standard),
+              border-color var(--duration-base) var(--ease-standard);
 }
 
-@media (max-width: 767px) {
-  .container {
-    padding: 0 20px;
-  }
+.scrolled .container {
+  background: rgba(10, 10, 10, 0.92);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6), inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2px);
 }
 
 .logo {
   font-family: 'Inter Tight', sans-serif;
   font-weight: 800;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   letter-spacing: -0.04em;
   color: #FFFFFF;
-}
-
-/* If headers sit on light sections, we want links readable before scroll */
-.logo, .navLink {
-  color: #FFFFFF;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
 }
 
 .desktopNav {
   display: flex;
   align-items: center;
   gap: 28px;
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.12);
-  padding: 8px 24px;
-  border-radius: 40px;
-}
-
-@media (max-width: 900px) {
-  .desktopNav {
-    display: none;
-  }
 }
 
 .navLink {
   font-size: 0.95rem;
   font-weight: 500;
-  color: #C9C9C9;
+  color: #D1D1D1;
   letter-spacing: -0.01em;
   transition: color var(--duration-fast) var(--ease-standard);
   position: relative;
@@ -99,7 +74,7 @@
 }
 
 .navLink:hover {
-  color: var(--accent-red);
+  color: #FFFFFF;
 }
 
 .navLink:hover::after {
@@ -107,22 +82,53 @@
 }
 
 .hamburgerBtn {
-  background: #111111;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.2);
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background-color var(--duration-fast) var(--ease-standard),
-              transform var(--duration-fast) var(--ease-standard);
+              transform var(--duration-fast) var(--ease-standard),
+              border-color var(--duration-fast) var(--ease-standard);
 }
 
 .hamburgerBtn:hover {
-  background-color: var(--accent-red);
+  background-color: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
   transform: scale(1.05);
+}
+
+@media (min-width: 901px) {
+  .hamburgerBtn {
+    display: none !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .header {
+    top: 12px;
+  }
+
+  .container {
+    width: calc(100% - 24px);
+    padding: 8px 18px;
+  }
+
+  .desktopNav {
+    display: none;
+  }
+
+  .hamburgerBtn {
+    display: flex;
+  }
 }
 
 /* Mobile Overlay Menu */
