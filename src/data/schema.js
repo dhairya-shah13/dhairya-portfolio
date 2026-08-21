@@ -1,5 +1,5 @@
-// Structured data builders — minimal, truthful Schema.org only.
-// No empty/speculative fields; no types added for checklist purposes.
+// Structured data builders — fact-checked Schema.org graphs for SEO, AEO, and GEO.
+// Adheres strictly to SEO.md §10. No fabricated or speculative fields.
 import { person, SITE_URL } from './person.js';
 
 const personCore = {
@@ -28,7 +28,14 @@ export function buildProfilePageSchema(path = '/') {
     '@context': 'https://schema.org',
     '@type': 'ProfilePage',
     url: `${SITE_URL}${path}`,
-    mainEntity: personCore,
+    name: `Dhairya Shah — Profile`,
+    description: person.description,
+    mainEntity: {
+      ...personCore,
+      address: person.address,
+      sameAs: person.sameAs,
+      knowsAbout: person.knowsAbout,
+    },
   };
 }
 
@@ -36,14 +43,15 @@ export function buildWebsiteSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Dhairya Shah — Portfolio',
+    name: 'Dhairya Shah — Portfolio & Case Studies',
     url: `${SITE_URL}/`,
     description: person.description,
+    publisher: personCore,
   };
 }
 
 export function buildBreadcrumbSchema(items) {
-  // items: [{ name, path }] — path is the page path ('' for current page)
+  // items: [{ name, path }] — path is relative to root
   const itemListElement = items.map((item, i) => ({
     '@type': 'ListItem',
     position: i + 1,
@@ -74,16 +82,55 @@ export function buildFaqSchema(questions) {
 }
 
 export function buildProjectSchema(project) {
-  // Only used when a truthful URL exists (live site or repository).
+  // Generates SoftwareApplication schema when a truthful link exists
   const url = project.live || project.github;
   if (!url) return null;
-  return {
+
+  const schema = {
     '@context': 'https://schema.org',
-    '@type': 'CreativeWork',
+    '@type': 'SoftwareApplication',
     name: project.name,
     description: project.description,
     url,
     author: personCore,
+    applicationCategory: project.category,
+    operatingSystem: 'Cross-Platform, Web',
     keywords: project.tags.join(', '),
   };
+
+  if (project.tldr && project.tldr.length > 0) {
+    schema.featureList = project.tldr.join('; ');
+  }
+
+  return schema;
 }
+
+export function buildBlogPostingSchema(post) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: post.title,
+    description: post.description,
+    image: `${SITE_URL}/og-image.png`,
+    author: {
+      '@type': 'Person',
+      name: person.name,
+      url: person.url,
+      jobTitle: person.jobTitle,
+      sameAs: person.sameAs,
+    },
+    publisher: {
+      '@type': 'Person',
+      name: person.name,
+      url: person.url,
+    },
+    datePublished: post.datePublished,
+    dateModified: post.dateModified || post.datePublished,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${SITE_URL}/blogs/${post.slug}`,
+    },
+    keywords: post.tags.join(', '),
+  };
+}
+

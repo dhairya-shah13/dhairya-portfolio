@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from 'motion/react';
 import { focusAreasData as baseFocusAreas } from '../data/siteContent.js';
 import styles from './FocusAreas.module.css';
@@ -119,6 +120,23 @@ function FocusAreas() {
                   {/* Mobile-only descriptive stack layout (Stacks underneath when active) */}
                   <div className={`${styles.mobileDescriptionPanel} ${isActive ? styles.mobileOpen : ''}`}>
                     <p className={styles.mobileDescription}>{item.description}</p>
+                    {item.guideLink && (
+                      <Link
+                        to={item.guideLink}
+                        style={{
+                          display: 'inline-block',
+                          fontSize: '0.85rem',
+                          fontWeight: 700,
+                          color: 'var(--accent-red)',
+                          marginTop: 8,
+                          marginBottom: 12,
+                          textDecoration: 'underline',
+                          textUnderlineOffset: 3,
+                        }}
+                      >
+                        {item.guideLabel || 'Explore Guide →'}
+                      </Link>
+                    )}
                     <div className={styles.mobileGraphic}>
                       <img 
                         src={item.image} 
@@ -161,6 +179,25 @@ function FocusAreas() {
                 <p className={styles.panelDescription} style={{ transform: "translateZ(15px)" }}>
                   {focusAreasData[activeIndex].description}
                 </p>
+
+                {focusAreasData[activeIndex].guideLink && (
+                  <Link
+                    to={focusAreasData[activeIndex].guideLink}
+                    style={{
+                      transform: "translateZ(20px)",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 6,
+                      fontSize: "0.9rem",
+                      fontWeight: 700,
+                      color: "var(--accent-red)",
+                      marginTop: 14,
+                      textDecoration: "none",
+                    }}
+                  >
+                    {focusAreasData[activeIndex].guideLabel || 'Explore Technical Guide →'}
+                  </Link>
+                )}
               </motion.div>
             </AnimatePresence>
           </motion.div>

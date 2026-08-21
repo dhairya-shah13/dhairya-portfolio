@@ -139,20 +139,27 @@
 .panelCard {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 24px;
+  background: rgba(20, 20, 20, 0.65);
+  backdrop-filter: blur(20px) saturate(180%) contrast(105%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%) contrast(105%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .gradientVisual {
   width: 100%;
   aspect-ratio: 4 / 3;
-  border-radius: 20px;
+  border-radius: 18px;
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
 }
 
 .gridOverlay {

@@ -126,6 +126,10 @@ function Hero() {
       className={`section-dark ${styles.heroSection}`}
       onMouseMove={handleMouseMove}
     >
+      {/* Ambient Liquid Glass Floating Orbs */}
+      <div className={styles.liquidOrb1} aria-hidden="true" />
+      <div className={styles.liquidOrb2} aria-hidden="true" />
+
       <motion.div 
         className={`container ${styles.heroContainer}`}
         variants={containerVariants}

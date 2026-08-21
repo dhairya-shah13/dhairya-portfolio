@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'motion/react';
 import { Github, ExternalLink, ArrowRight } from 'lucide-react';
 import Seo from '../components/Seo.jsx';
 import JsonLd from '../components/JsonLd.jsx';
@@ -8,19 +9,48 @@ import { projectImages } from '../data/projectImages.js';
 import { buildBreadcrumbSchema } from '../data/schema.js';
 import styles from './ProjectsPage.module.css';
 
+const projectsTldr = [
+  'Six live software products engineered and shipped end-to-end by Dhairya Shah.',
+  'Covering diverse domains: E-commerce, automotive service portals, personal finance tracking, and sales analytics.',
+  'Technologies: React.js, Node.js, Express.js, MongoDB, Kotlin, Django, Flask, Docker, and Netlify/Vercel edge hosting.',
+  'Structured architecture: decoupled REST APIs, normalized document/relational schemas, and mobile-first responsive design.',
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08, delayChildren: 0.05 },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.35, ease: [0.4, 0, 0.2, 1] },
+  },
+};
+
 function ProjectsPage() {
   return (
     <>
       <Seo
-        title="Dhairya Shah Projects | Full-Stack, DevOps & Cloud"
-        description="Six live products shipped end-to-end by Dhairya Shah — e-commerce, finance, sales monitoring, service-center and collaborative platforms built with React, Node.js, Django, Flask and MongoDB."
+        title="Dhairya Shah Projects | Full-Stack, DevOps & Cloud Case Studies"
+        description="Explore six live products shipped end-to-end by Dhairya Shah — e-commerce, finance, sales monitoring, service-center and collaborative platforms built with React, Node.js, Express, Kotlin and MongoDB."
         path="/projects"
       />
-      <JsonLd data={buildBreadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Projects', path: '/projects' }])} />
+      <JsonLd
+        data={buildBreadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Projects', path: '/projects' },
+        ])}
+      />
 
       <section className={`section-dark ${styles.headerSection}`}>
         <div className="container">
-          <p className={styles.eyebrow}>Portfolio</p>
+          <p className={styles.eyebrow}>Portfolio & Case Studies</p>
           <h1 className={styles.title}>Projects</h1>
           <p className={styles.subline}>
             Six products shipped end-to-end by Dhairya Shah — from database schema to server provisioning to
@@ -29,11 +59,28 @@ function ProjectsPage() {
         </div>
       </section>
 
-      <section className="section-light section-padding" style={{ paddingTop: 80 }}>
+      <section className="section-light section-padding" style={{ paddingTop: 60 }}>
         <div className="container">
-          <div className={styles.grid}>
+          {/* TL;DR Summary Block for Fast AI / Reader Ingestion */}
+          <div className={styles.tldrBox}>
+            <p className={styles.tldrTitle}>Portfolio Overview (TL;DR)</p>
+            <ul className={styles.tldrList}>
+              {projectsTldr.map((bullet, idx) => (
+                <li key={idx} className={styles.tldrItem}>
+                  <strong>{bullet.split(' ')[0]}</strong> {bullet.slice(bullet.indexOf(' ') + 1)}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <motion.div
+            className={styles.grid}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {projects.map((project, index) => (
-              <article key={project.slug} className={styles.card}>
+              <motion.article key={project.slug} className={styles.card} variants={cardVariants}>
                 <div className={styles.thumbnailContainer}>
                   <img
                     src={projectImages[project.image]}
@@ -54,6 +101,9 @@ function ProjectsPage() {
                 </div>
 
                 <div className={styles.meta}>
+                  {project.clusterTopic && (
+                    <span className={styles.clusterBadge}>{project.clusterTopic}</span>
+                  )}
                   <h2 className={styles.projectName}>{project.name}</h2>
                   <p className={styles.projectCategory}>{project.category}</p>
                   <p className={styles.projectDescription}>{project.description}</p>
@@ -90,17 +140,17 @@ function ProjectsPage() {
                     </a>
                   )}
                 </div>
-              </article>
+              </motion.article>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       <section className="section-light" style={{ borderTop: '1px solid var(--border-current)' }}>
         <div className="container" style={{ padding: '80px 40px' }}>
           <p className={styles.footerNote}>
-            More about Dhairya Shah on the <Link to="/about" className={styles.inlineLink}>About page</Link>, or
-            browse his <a href="https://github.com/dhairya-shah13" target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>GitHub</a>.
+            Explore more background on the <Link to="/about" className={styles.inlineLink}>About page</Link>, or
+            view source repositories on <a href="https://github.com/dhairya-shah13" target="_blank" rel="noopener noreferrer" className={styles.inlineLink}>GitHub</a>.
           </p>
         </div>
       </section>

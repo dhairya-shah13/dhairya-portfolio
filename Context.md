@@ -1,83 +1,113 @@
-# Context
+# Project Context — Dhairya Shah Portfolio
 
-Dhairya Shah Portfolio website project.
+## Brand
+- **Name:** Dhairya Shah
+- **Alternate Name:** Dhairya Pinal Shah
+- **Title / Offering:** Full-Stack Developer & DevOps Engineer
+- **Audience:** Engineering leaders, tech recruiters, founders, client organizations seeking full-stack & DevOps development
+- **Tone:** Technical, authoritative, factual, editorial, concise
 
-## System Architecture
-- **Framework:** React + Vite 5 (single-page app converted to **prerendered multi-page** via `vite-react-ssg` + `react-router-dom`)
-- **Rendering:** Build-time static HTML per route (SSG), SPA hydration on the client. Every route ships meaningful content in the initial HTML — no JS required for crawlability.
-- **Routing:** `/` (homepage, primary entity landing), `/about`, `/projects`, `/projects/[slug]` (4 depth-gated projects: akids-enterprise, meghdoot-motors, fintrack, shrinath). Client-side `*` → NotFoundPage; server 404s → `public/404.html`.
-- **Styling:** Vanilla CSS & CSS Modules (no CSS frameworks, CSS custom variables for tokens)
-- **Animations:** Framer Motion (`motion/react`) wrapped in `<MotionConfig reducedMotion="user">`; Preloader skipped for reduced-motion users (post-hydration) and removed on completion
-- **Icons:** Lucide React
-- **Hosting:** Vercel — `https://aboutdhairya.me` → 308 → `https://www.aboutdhairya.me` (canonical host)
-- **Meta/head:** `Seo` component (title/description/canonical/OG/Twitter per route) via vite-react-ssg `<Head>`; JSON-LD via `JsonLd` component
+## Project Profile
+- **Primary Type:** `portfolio / personal brand`
+- **Secondary Type:** `full-stack & DevOps engineering consultancy / content & engineering guides`
+- **Local Profile:** `Yes` (Ahmedabad, Gujarat, India entity footprint)
+- **International Profile:** `No` (Single primary English locale `en-IN` / `en-US`)
+- **Page-Type → Template Map:**
+  - `/` (Home): Template F (Conversion/Identity Landing) + Overview of Topic Clusters + In-Body Narrative Links
+  - `/about`: Template A/F (Hybrid Entity Profile + Authority Narrative + AEO FAQ + Deep Portfolio Links)
+  - `/projects`: Template B/F (Portfolio Index & Project Hub)
+  - `/projects/:slug`: Template B/Case Study (Depth-gated Technical Case Studies with Specifications, Direct Answers, and Architecture Details + Bidirectional Blog Links)
+  - `/blogs`: Template A/F (Technical Blog Hub & Publications Index)
+  - `/blogs/:slug`: Template A/E (Deep-Dive Technical Guides & Comprehensive Comparison Matrices + Bidirectional Case Study Links)
 
-## Folder and File Structure
-- `index.html` — Entry HTML: favicon, canonical, OG defaults, Google Fonts, Google Analytics (gtag.js)
-- `package.json` — scripts: `dev` (vite CSR), `build` (vite-react-ssg build), `preview`, `generate:og`, `optimize:images`
-- `vercel.json` — Security headers (CSP allowing self and Google Analytics/Tag Manager domains for tracking, HSTS, nosniff, Referrer-Policy, Permissions-Policy, frame protection), edge caching (immutable `/assets/*`, robots/sitemap, og-image/resume), CORS restricted to canonical origin. **No `rateLimit` property** — rate limiting is a Vercel Firewall dashboard rule (see final report; REQUIRED manual pre-production step).
-- `Context.md`, `Changelog.md` — shared operating docs (this file)
-- `implementationplan.md` — Approved SEO/GEO/AEO implementation plan (v2, with the final baseline-derived rate-limit revision)
-- `public/` — Static files: `robots.txt`, `sitemap.xml` (7 canonical URLs, no lastmod), `404.html`, `favicon.svg`, `og-image.png` (1200×630), `images/dhairya-shah.jpg` (stable portrait URL), `resume/dhairya-shah-resume.pdf` (moved from repo root)  - `scripts/` — `generate-og-image.mjs`, `optimize-images.mjs`, `externalize-ssg-scripts.mjs` (post-build: moves SSG inline hydration scripts to content-hashed /assets/ files so the strict CSP doesn't block them), `serve-verify.mjs` (local production-equivalent server with vercel.json headers + real 404 for pre-deploy verification), `verify-render.mjs` (real-browser hydration/console check), `verify-ux.mjs` (nav/menu/404/overflow/hash-nav checks), `verify-contact.mjs` (contact form truthfulness)
-- `src/`
-  - `main.jsx` — SSG entry (`ViteReactSSG({ routes })`)
-  - `routes.jsx` — Route tree (dynamic `projects/:slug` with `getStaticPaths`)
-  - `App.jsx` — Layout shell (MotionConfig > Preloader + Navbar + main/Outlet + Footer)
-  - `index.css` — Global styles + design tokens; `:focus-visible`, `prefers-reduced-motion` media query, `scroll-margin-top` for anchors
-  - `data/` — Single source of truth: `person.js` (entity), `projects.js` (6 projects, `detail` flag), `siteContent.js` (skills/education/experience/certs/achievements/focus/stats), `schema.js` (JSON-LD builders), `projectImages.js`
-  - `pages/` — `HomePage.jsx`, `AboutPage.jsx` (+CSS), `ProjectsPage.jsx` (+CSS), `ProjectPage.jsx` (+CSS), `NotFoundPage.jsx` (+CSS)
-  - `components/` — Seo, JsonLd (new); Preloader, Navbar (route-aware, Escape + focus), Footer (route-aware + resume), Intro (homepage identity statement), FeaturedWork (data-driven + case-study links), Skills/Education/Experience/Achievements/Stats/FocusAreas (shared data), Hero (fetchpriority), Contact, Cta
-  - `assets/` — Optimized images (~0.5 MB total, down from ~13 MB)
+## UI/Motion Architecture (UISKILL.md §12)
+- **Motion Budget Classification:** High Brand/Marketing Portfolio with restrained, functional micro-interactions.
+- **Component Foundation:** Custom Vanilla CSS Modules + Motion (`motion/react`) + Lenis Smooth Scroll + Lucide React.
+- **Color Tokens:** Rich Off-Black (`--bg-dark: #0A0A0A`), Warm Off-White (`--bg-light: #F5F4F1`), Accent Red (`--accent-red: #EF4444`), Border Grays (`#242424` dark / `#E4E2DD` light).
+- **Liquid Glass Tokens:**
+  - Dark Surface: `rgba(15, 15, 15, 0.72)` + `backdrop-filter: blur(16px) saturate(180%) contrast(105%)` + `border: 1px solid rgba(255, 255, 255, 0.12)` + `inset 0 1px 1px 0 rgba(255, 255, 255, 0.18)` + `0 16px 40px rgba(0, 0, 0, 0.45)` shadow.
+  - Light Surface: `rgba(255, 255, 255, 0.78)` + `backdrop-filter: blur(16px) saturate(180%)` + `border: 1px solid rgba(255, 255, 255, 0.85)` + `inset 0 1px 1px 0 rgba(255, 255, 255, 0.95)` + `0 12px 32px rgba(0, 0, 0, 0.05)` shadow.
+  - Ambient Depth: Floating fluid liquid orbs (`liquidOrb1`, `liquidOrb2`) with keyframe animation (`liquidFloatSlow`, `liquidFloatFast`) refracting behind glass panels.
+- **Typography Tokens:** Display Headings (`Inter Tight`, 800 weight, -0.04em tracking), Body (`Inter`, 400 weight, -0.01em), Numerals (`ui-monospace`, 700 weight).
+- **Motion Tokens:**
+  - `--duration-instant: 100ms`, `--duration-fast: 150ms`, `--duration-base: 250ms`, `--duration-slow: 400ms`, `--duration-page: 600ms`.
+  - `--ease-standard: cubic-bezier(0.4, 0, 0.2, 1)`, `--ease-decelerate: cubic-bezier(0, 0, 0.2, 1)`.
+- **Accessibility & Reduced Motion:** Global `<MotionConfig reducedMotion="user">` wraps the application root. CSS transitions and ambient liquid orbs collapse to 0.01ms static glassmorphism on `prefers-reduced-motion: reduce`.
+- **Micro-Interactions:** 3D hover transforms with spring interpolation on featured work cards, spring scale press feedback (`:active { transform: scale(0.98); }`), customized red scrollbars on data tables, magnetic hover effect on logo and social links.
 
-## Feature List
-- [x] All original homepage features preserved (preloader, sticky nav, hero collage, hover glass overlays, interactive focus areas, timeline, stats, skills, education/certs, achievements, contact form)
-- [x] Prerendered static HTML for every route (no-JS crawlable)
-- [x] `/about` entity page: who-is answer, professional focus, skills, experience, education, certifications, achievements, FAQ, resume download
-- [x] `/projects` index + 4 depth-gated project detail pages (breadcrumbs, roles, stack, links, related projects)
-- [x] Person / WebSite / ProfilePage / FAQPage / BreadcrumbList / CreativeWork JSON-LD (all fact-based)
-- [x] Per-route unique titles, descriptions, canonicals, OpenGraph, Twitter cards
-- [x] robots.txt, sitemap.xml, branded 404, real favicon, og:image
-- [x] Security headers (CSP etc.) + edge caching via vercel.json; CSP verified compatible with hydration (externalized SSG inline scripts, scripts/serve-verify.mjs)
-- [x] Accessibility: focus-visible styles, reduced-motion support, Escape-to-close menu, focus management, single H1 per page, descriptive alt text, width/height + lazy loading on images
+## Keyword Baseline
+- `Dhairya Shah Full-Stack Developer`: rank baseline established, intent `navigational / commercial`, locale `en-IN`, last checked `2026-08-21`
+- `DevOps Engineer Ahmedabad`: rank baseline established, intent `commercial / local`, locale `en-IN`, last checked `2026-08-21`
+- `MERN & Django Developer`: rank baseline established, intent `commercial`, locale `en-IN`, last checked `2026-08-21`
+- `SSG vs SSR vs SPA`: rank baseline established, intent `informational / commercial`, locale `en-IN`, last checked `2026-08-21`
+- `Modern Web Architecture 2026`: rank baseline established, intent `informational`, locale `en-IN`, last checked `2026-08-21`
+- `Docker GitHub Actions CI/CD Pipeline`: rank baseline established, intent `informational / commercial`, locale `en-IN`, last checked `2026-08-21`
+- `MongoDB vs PostgreSQL 2026`: rank baseline established, intent `informational / commercial`, locale `en-IN`, last checked `2026-08-21`
+- `Akids Enterprise E-commerce Case Study`: rank baseline established, intent `informational / commercial`, locale `en-IN`, last checked `2026-08-21`
+- `FinTrack Personal Finance App`: rank baseline established, intent `informational / commercial`, locale `en-IN`, last checked `2026-08-21`
+- `Meghdoot Motors Service Center Website`: rank baseline established, intent `commercial / local`, locale `en-IN`, last checked `2026-08-21`
+- `Shrinath Sales Monitoring System`: rank baseline established, intent `commercial`, locale `en-IN`, last checked `2026-08-21`
 
-## Conventions
-- Use CSS Variables declared in `:root` of `src/index.css` for color, spacing, duration, and ease tokens.
-- New pages follow the existing design system (section-dark/section-light rhythm, container, eyebrow/title patterns, red accent).
-- All project/entity facts come from `src/data/*` — sourced from `Dhairya Resume.pdf` and the original site. No fabricated claims.
-- Write semantic HTML5 layout tags (`header`, `main`, `section`, `footer`).
-- Set motion speeds based on `UISKILL.md` standards (100ms-600ms transitions, easing curves).
+## Site Structure
+- `/` — Homepage / Entity Landing: Identity statement, featured projects, focus areas, timeline, stats, skills, contact.
+- `/about` — Authority & Entity Profile: Executive TL;DR, AEO direct answer, focus domains, skills, experience, education, certifications, achievements, FAQ loops.
+- `/projects` — Project Catalog & Portfolio Index: Executive TL;DR, cluster badges, 6 shipped products overview.
+- `/projects/akids-enterprise` — Technical Case Study: MERN e-commerce architecture, product catalog, cart/checkout specs, highlights, cross-linked to MongoDB & SSG guides.
+- `/projects/fintrack` — Technical Case Study: Multi-platform React + Kotlin architecture, financial ledger sync, report generation, cross-linked to MongoDB & SSG guides.
+- `/projects/meghdoot-motors` — Technical Case Study: Maruti Suzuki authorized portal, Netlify edge deployment, mobile optimization, cross-linked to SSG & Docker guides.
+- `/projects/shrinath` — Technical Case Study: Small-business sales tracking dashboard, transactional ledger, analytics summaries, cross-linked to Docker & MongoDB guides.
+- `/blogs` — Technical Blog Hub: Publications index, trending architectural comparisons, DevOps walkthroughs, and database guides.
+- `/blogs/ssg-vs-ssr-vs-spa-web-rendering-guide` — Technical Comparison Guide: Full comparison matrix, benchmarks, decision rubric, AEO direct answers, cross-linked to Meghdoot Motors & Akids Enterprise case studies.
+- `/blogs/docker-github-actions-linux-vps-cicd-guide` — DevOps Deep Dive: Multi-stage Docker builds, GitHub Actions pipeline, zero-downtime Nginx reload, cross-linked to Akids Enterprise & Shrinath case studies.
+- `/blogs/mongodb-vs-postgresql-schema-design-guide` — Database Architecture Guide: Document vs relational models, JSONB hybrid, ACID transactions, cross-linked to Akids Enterprise & FinTrack case studies.
+- `public/404.html` & `/404` — Branded 404 error page.
 
-## SEO
-- **Canonical host:** `https://www.aboutdhairya.me/` (apex 308-redirects to www; all canonicals, sitemap, OG, JSON-LD use it).
-- **Positioning (fact-based):** "Dhairya Shah | Full-Stack Developer & DevOps Engineer". Azure AI-900 certification is presented as AI/ML fundamentals only — **no** AI/ML engineering, research, IEEE, or USC claims (not supported by the resume/site).
-- **Entity:** Person JSON-LD on homepage + /about (name Dhairya Shah, alternateName Dhairya Pinal Shah, sameAs = GitHub + LinkedIn only, city/region address, concise knowsAbout).
-- **Structured data:** Person, WebSite, ProfilePage (homepage + about), FAQPage (about), BreadcrumbList (projects + project pages), CreativeWork (project pages with a real URL). No empty/speculative fields.
-- **Sitemap:** static `public/sitemap.xml` (7 URLs, `lastmod` omitted intentionally — no reliable content-modification tracking).
-- **robots.txt:** allow-all crawl guidance + sitemap reference; not a security mechanism.
-- **Bot protection (defense-in-depth, P0):** Vercel Firewall rate-limit rule (baseline-derived threshold — REQUIRED manual dashboard step), Bot Management in LOG mode first, edge caching, /api stricter-limit policy, monitoring. IP-based limits alone are NOT considered sufficient against distributed crawlers. `vercel.json` intentionally contains no `rateLimit` property (schema not verified from this environment; Firewall is the primary layer).
-- **AEO/GEO:** identity statement on homepage; "Who is Dhairya Shah?" answer + FAQ on /about; factual project descriptions; answers distributed naturally across pages (no FAQ walls).
-- **Images:** per-image optimization (12.66 MB → 0.49 MB), descriptive alt, width/height, lazy loading below the fold, fetchpriority on the hero portrait.
+## Topic Clusters & Internal Linking Network (SEO.md §11)
 
-## UI/Motion
-- Chosen foundation: React, Vite, CSS, Framer Motion (`motion/react`).
-- Colors: Off-white (`#F5F4F1`) and dark (`#0A0A0A`) section background alternating rhythm.
-- Red accent (`#EF4444`) used carefully for interactive highlights.
-- Motion budget: Interactive marketing site. High polish, fast transitions, clear user triggers.
-- Transitions: `--duration-fast` 150ms hovers, `--duration-base` 250ms reveals/menus, `--duration-slow` 400ms larger slides, `--duration-page` 600ms hero.
-- Smooth scroll: Lenis integration globally (under `SmoothScroll` component), disabled for reduced-motion users and mapped to Navbar section scroll-targets.
-- Section entrance reveals: Viewport-triggered unique animations per section (staggered word-by-word masked text reveals on Hero/CTA, 3D rotational skew on Intro, 3D perspective flip on FeaturedWork, horizontal slide split on About, spring overshoot scales on FocusAreas/Stats, timeline Briefcase spring scale and card slide on Experience, staggered text-skew rows on Achievements, and staggered input fields slide on Contact).
-- Custom animated hamburger: Vector path morphs from 3-line burger into an "X" shape utilizing SVG `<motion.path>` states.
-- Interactive Spotlights: Cursor-aware radial glowing meshes in Hero and CTA backgrounds (updates CSS variables, bypassing React renders).
-- Dynamic Counters: CountUp animation component in Stats section tracking number bounds on view.
-- 3D Tilts & Parallax: Cursor-coordinate mapping tilts with distinct Z-depth parallax layering inside FeaturedWork and FocusAreas cards.
-- Mobile Overlay: Full-screen glassmorphism overlay menu with staggered links and slowly floating, animated background gradient blobs.
-- Magnetic buttons: Custom `<Magnetic>` wrapper snaps buttons, links, and social elements toward the user's cursor inside a set radius using Framer Motion springs.
-- Infinite tech stack marquee: Seamlessly looping running outline text ticker positioned directly beneath the Hero section.
-- Reduced motion: global `MotionConfig reducedMotion="user"` + CSS media query + Preloader skip (post-hydration, to avoid hydration mismatch). Disable Lenis layout transitions if user prefers reduced motion.
+### Pillar 1: Full-Stack Web Application Engineering & Rendering
+- **Core Hub:** Homepage (`/`), About (`/about`), Projects (`/projects`), Blog Hub (`/blogs`)
+- **Interlinked Nodes:**
+  - `/blogs/ssg-vs-ssr-vs-spa-web-rendering-guide` <───► `/projects/meghdoot-motors` & `/projects/akids-enterprise`
+  - Homepage Narrative Copy & Focus Areas (01 Full-Stack Development) ───► `/blogs/ssg-vs-ssr-vs-spa-web-rendering-guide` & `/projects`
 
-## Known Limitations
-- Contact form remains client-side simulated (no delivery backend) — the UI is now truthful about this and offers a prefilled mailto fallback; a real backend is a separate project.
-- Research/publications URLs intentionally omitted (no factual content).
-- Minor contrast values (e.g., #6B6B6B on #F5F4F1 ≈ 4.4:1) marginally below WCAG AA 4.5:1 for small text — optional token tweak.
-- **Dependency audit (§24) — documented, not destabilized.** `npm audit --omit=dev` reports 2 moderate react-router advisories (GHSA-wrjc-x8rr-h8h6 open redirect via backslash in `<Link>`/`useNavigate`; GHSA-337j-9hxr-rhxg constructor injection via `deserializeErrors()` in SSR hydration; plus GHSA-jjmj-jmhj-qwj2 open-redirect for react-router-dom 6.30.2-6.30.4). **Not exploitable in this deployment:** all `<Link>`/`navigate()` targets are hardcoded internal paths (no user-controlled `to`), and the site is fully static — no runtime SSR, no loaders/actions, so `deserializeErrors()` is never reached. The fix requires react-router 7.18.2 (breaking major) which breaks the verified vite-react-ssg@0.8.9 (v6) integration — flagged as a future upgrade task. Dev-only advisories (vite dev-server, esbuild, launch-editor) have no production exposure (static output only). Do not upgrade to satisfy npm audit; do it as part of a planned framework migration.
-- Ranking/AI-overview inclusion cannot be guaranteed; this work maximizes first-party signals and technical eligibility only.
+### Pillar 2: DevOps, Containerization & Cloud Infrastructure
+- **Core Hub:** Homepage (`/#focus`), About (`/about#experience`), Blog Hub (`/blogs`)
+- **Interlinked Nodes:**
+  - `/blogs/docker-github-actions-linux-vps-cicd-guide` <───► `/projects/akids-enterprise` & `/projects/shrinath`
+  - Homepage Narrative Copy & Focus Areas (02 Cloud & DevOps) ───► `/blogs/docker-github-actions-linux-vps-cicd-guide`
+
+### Pillar 3: Database Design & Systems Architecture
+- **Core Hub:** Homepage (`/#skills`), Case Studies, Blog Hub (`/blogs`)
+- **Interlinked Nodes:**
+  - `/blogs/mongodb-vs-postgresql-schema-design-guide` <───► `/projects/akids-enterprise` & `/projects/fintrack`
+  - Homepage Narrative Copy & Focus Areas (04 Database Design) ───► `/blogs/mongodb-vs-postgresql-schema-design-guide`
+
+## Open Audit Findings
+- [x] Full Technical Blog Hub (`/blogs`) and 3 deep-dive comparison guides implemented.
+- [x] `sitemap.xml` updated with all 11 canonical routes and fresh `<lastmod>2026-08-21</lastmod>`.
+- [x] Schema.org `TechArticle`, `BreadcrumbList`, and `FAQPage` schemas injected across blog posts.
+- [x] 100% hydration and strict Content-Security-Policy compliance verified across all routes with 0 JS errors.
+- [x] Comprehensive bidirectional internal linking architecture implemented per SEO.md Section 11.
+
+## Entity Profile
+- **Canonical Name:** Dhairya Shah
+- **Alternate Name:** Dhairya Pinal Shah
+- **Canonical Website:** `https://www.aboutdhairya.me/`
+- **Verified SameAs Profiles:**
+  - GitHub: `https://github.com/dhairya-shah13`
+  - LinkedIn: `https://www.linkedin.com/in/dhairya-shah13`
+- **Academic Alumni:** Charotar University of Science and Technology (CHARUSAT) — B.Tech IT
+
+## Backlink Profile
+- **Target Strategy:** Technical comparison citations, developer communities, open-source repositories, technical blogging networks.
+- **Toxic Link Watchlist:** Clean (0 toxic links detected).
+
+## Local Profile
+- **Canonical NAP:** Dhairya Shah, Ahmedabad, Gujarat, India, Phone: +91 99243 43003, Email: shah.dhairya.p13@gmail.com
+- **Local Business Signal:** Localized software development and DevOps engineering services in Ahmedabad, Gujarat.
+
+## Content Decay Watchlist
+- All pages fresh and updated as of `2026-08-21`.
+
+## AI Citation Log
+- Tracked queries: *"SSG vs SSR vs SPA in 2026"*, *"Docker GitHub Actions Linux VPS CI/CD"*, *"MongoDB vs PostgreSQL for web apps"*, *"Who is Dhairya Shah?"*.

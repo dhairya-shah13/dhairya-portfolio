@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import styles from './Intro.module.css';
 
@@ -25,12 +26,37 @@ function Intro() {
               {/* Homepage identity statement — the crawlable, factual answer to
                   "Who is Dhairya Shah?" (resume-sourced, written naturally). */}
               <p className={styles.description}>
-                Dhairya Shah is a full-stack developer and DevOps engineer based in Ahmedabad, Gujarat, who ships
-                products end-to-end — MERN and Django/Flask applications, Docker containerization, CI/CD pipelines,
-                and cloud deployment.
+                <Link
+                  to="/about"
+                  style={{ color: 'var(--text-primary)', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: 3 }}
+                >
+                  Dhairya Shah
+                </Link>{' '}
+                is a full-stack developer and DevOps engineer based in Ahmedabad, Gujarat, who ships products end-to-end —{' '}
+                <Link
+                  to="/blogs/mongodb-vs-postgresql-schema-design-guide"
+                  style={{ color: 'var(--text-primary)', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: 3 }}
+                >
+                  MERN
+                </Link>{' '}
+                and Django/Flask applications,{' '}
+                <Link
+                  to="/blogs/docker-github-actions-linux-vps-cicd-guide"
+                  style={{ color: 'var(--text-primary)', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: 3 }}
+                >
+                  Docker containerization, CI/CD pipelines
+                </Link>
+                , and cloud deployment.
               </p>
               <p className={styles.description}>
-                Six live products shipped end-to-end, from database schema to server provisioning to production URL.
+                Explore{' '}
+                <Link
+                  to="/projects"
+                  style={{ color: 'var(--text-primary)', fontWeight: 600, textDecoration: 'underline', textUnderlineOffset: 3 }}
+                >
+                  six live products shipped end-to-end
+                </Link>
+                , from database schema to server provisioning to production URL.
               </p>
               <div className={styles.divider}></div>
             </div>

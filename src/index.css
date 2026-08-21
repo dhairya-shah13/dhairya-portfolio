@@ -1,10 +1,24 @@
-/* Design Tokens & Global CSS */
+/* Design Tokens & Global CSS — Liquid Glass Edition */
 
 :root {
   /* Color Palette (Raw Values) */
   --bg-light: #F5F4F1; /* Off-white, not pure white */
   --bg-dark: #0A0A0A;  /* Off-black */
   --accent-red: #EF4444; /* Alert/Interactive Red */
+  
+  /* Liquid Glass Tokens */
+  --glass-dark-bg: rgba(15, 15, 15, 0.72);
+  --glass-dark-border: rgba(255, 255, 255, 0.12);
+  --glass-dark-shine: inset 0 1px 1px 0 rgba(255, 255, 255, 0.18), inset 0 -1px 0 0 rgba(0, 0, 0, 0.4);
+  --glass-dark-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.45);
+  
+  --glass-light-bg: rgba(255, 255, 255, 0.78);
+  --glass-light-border: rgba(255, 255, 255, 0.85);
+  --glass-light-shine: inset 0 1px 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 0 0 rgba(0, 0, 0, 0.04);
+  --glass-light-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.05);
+
+  --glass-blur: blur(16px) saturate(180%) contrast(105%);
+  --glass-blur-heavy: blur(24px) saturate(200%);
   
   /* Motion Tokens (from UISKILL.md) */
   --duration-instant: 100ms;
@@ -219,4 +233,83 @@ input:focus, textarea:focus {
   height: 12px;
   border-radius: 50%;
   background-color: var(--accent-red);
+}
+
+/* Global button & interactive element micro-interaction */
+button:active, .primaryBtn:active, .ghostBtn:active {
+  transform: scale(0.98);
+}
+
+/* Custom scrollbars for responsive tables */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(239, 68, 68, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-red);
+}
+
+/* =========================================================================
+   LIQUID GLASS UTILITIES & AMBIENT ANIMATIONS
+   ========================================================================= */
+
+.glass-dark {
+  background: var(--glass-dark-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-dark-border);
+  box-shadow: var(--glass-dark-shadow), var(--glass-dark-shine);
+}
+
+.glass-light {
+  background: var(--glass-light-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-light-border);
+  box-shadow: var(--glass-light-shadow), var(--glass-light-shine);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+}
+
+@keyframes liquidFloatSlow {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(30px, -40px, 0) scale(1.08);
+  }
+  66% {
+    transform: translate3d(-20px, 20px, 0) scale(0.95);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes liquidFloatFast {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-35px, -25px, 0) scale(1.12);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
 }

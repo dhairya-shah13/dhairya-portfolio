@@ -4,6 +4,7 @@ import { Github, ExternalLink, ArrowLeft, ArrowRight, Lock } from 'lucide-react'
 import Seo from '../components/Seo.jsx';
 import JsonLd from '../components/JsonLd.jsx';
 import { getProjectBySlug, projects } from '../data/projects.js';
+import { blogPosts } from '../data/blogs.js';
 import { projectImages } from '../data/projectImages.js';
 import { buildBreadcrumbSchema, buildProjectSchema } from '../data/schema.js';
 import styles from './ProjectPage.module.css';
@@ -21,13 +22,17 @@ function ProjectPage() {
     .map((s) => projects.find((p) => p.slug === s))
     .filter(Boolean);
 
-  const title = `${project.name} — Project | Dhairya Shah`;
+  const relatedBlogs = (project.relatedBlogSlugs || [])
+    .map((s) => blogPosts.find((b) => b.slug === s))
+    .filter(Boolean);
+
+  const title = `${project.name} — Technical Case Study | Dhairya Shah`;
 
   return (
     <>
       <Seo
         title={title}
-        description={`${project.description} Built by Dhairya Shah (${project.tags.join(', ')}).`}
+        description={`${project.description} Engineered and deployed by Dhairya Shah (${project.tags.join(', ')}).`}
         path={`/projects/${project.slug}`}
       />
       <JsonLd
@@ -53,6 +58,9 @@ function ProjectPage() {
             <span className={`${styles.crumb} ${styles.crumbCurrent}`}>{project.name}</span>
           </nav>
 
+          {project.clusterTopic && (
+            <span className={styles.clusterBadge}>{project.clusterTopic}</span>
+          )}
           <p className={styles.eyebrow}>{project.category}</p>
           <h1 className={styles.title}>{project.name}</h1>
 
@@ -62,12 +70,12 @@ function ProjectPage() {
             </Link>
             {project.github && (
               <a href={project.github} target="_blank" rel="noopener noreferrer" className={styles.externalLink}>
-                <Github size={16} /> GitHub
+                <Github size={16} /> GitHub Repository
               </a>
             )}
             {project.live && (
               <a href={project.live} target="_blank" rel="noopener noreferrer" className={styles.externalLink}>
-                <ExternalLink size={16} /> Live Site
+                <ExternalLink size={16} /> Live Application
               </a>
             )}
             {!project.github && !project.live && (
@@ -79,27 +87,92 @@ function ProjectPage() {
         </div>
       </section>
 
-      <section className="section-light section-padding" style={{ paddingTop: 80 }}>
+      <section className="section-light section-padding" style={{ paddingTop: 60 }}>
         <div className="container">
           <div className={styles.contentGrid}>
             <div className={styles.mainColumn}>
+              {/* Project Hero Image */}
               <div className={styles.imageFrame}>
                 <img
                   src={projectImages[project.image]}
-                  alt={`${project.name} — ${project.category} project screenshot`}
+                  alt={`${project.name} — ${project.category} case study screenshot`}
                   className={styles.projectImg}
                   width={1200}
                   height={750}
                 />
               </div>
 
-              <h2 className={styles.sectionHeading}>Overview</h2>
+              {/* TL;DR Summary Block (AEO / GEO Direct Ingestion) */}
+              {project.tldr && project.tldr.length > 0 && (
+                <div className={styles.tldrBox}>
+                  <p className={styles.tldrTitle}>Case Study Summary (TL;DR)</p>
+                  <ul className={styles.tldrList}>
+                    {project.tldr.map((bullet, idx) => (
+                      <li key={idx} className={styles.tldrItem}>
+                        <strong>{bullet.split(' ')[0]}</strong> {bullet.slice(bullet.indexOf(' ') + 1)}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Technical Specifications Table */}
+              {project.specs && (
+                <div>
+                  <h2 className={styles.sectionHeading}>Technical Specifications</h2>
+                  <div className={styles.specTable}>
+                    {Object.entries(project.specs).map(([key, val]) => (
+                      <div key={key} className={styles.specRow}>
+                        <span className={styles.specKey}>
+                          {key.replace(/([A-Z])/g, ' $1').trim()}
+                        </span>
+                        <span className={styles.specVal}>{val}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Project Overview */}
+              <h2 className={styles.sectionHeading}>Project Overview</h2>
               <p className={styles.paragraph}>{project.description}</p>
 
-              <h2 className={styles.sectionHeading}>Dhairya's Role</h2>
+              {/* Problem Statement */}
+              {project.problem && (
+                <>
+                  <h2 className={styles.sectionHeading}>The Challenge</h2>
+                  <p className={styles.paragraph}>{project.problem}</p>
+                </>
+              )}
+
+              {/* Architectural Solution */}
+              {project.solution && (
+                <>
+                  <h2 className={styles.sectionHeading}>Engineering Solution & Architecture</h2>
+                  <p className={styles.paragraph}>{project.solution}</p>
+                </>
+              )}
+
+              {/* Key Highlights */}
+              {project.highlights && project.highlights.length > 0 && (
+                <>
+                  <h2 className={styles.sectionHeading}>Key Deliverables & Highlights</h2>
+                  <ul className={styles.highlightsList}>
+                    {project.highlights.map((h, i) => (
+                      <li key={i} className={styles.highlightItem}>
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+
+              {/* Dhairya's Role */}
+              <h2 className={styles.sectionHeading}>Dhairya's Direct Role</h2>
               <p className={styles.paragraph}>{project.role}</p>
 
-              <h2 className={styles.sectionHeading}>Technology Stack</h2>
+              {/* Technology Stack */}
+              <h2 className={styles.sectionHeading}>Technologies & Tools</h2>
               <div className={styles.tagList}>
                 {project.tags.map((tag) => (
                   <span key={tag} className={styles.tag}>
@@ -109,29 +182,50 @@ function ProjectPage() {
               </div>
             </div>
 
+            {/* Sticky Sidebar */}
             <aside className={styles.sideColumn}>
               <div className={styles.sideCard}>
-                <h3 className={styles.sideTitle}>About the Developer</h3>
+                <h3 className={styles.sideTitle}>Lead Engineer</h3>
                 <p className={styles.sideText}>
-                  This project was built by Dhairya Shah, a full-stack developer and DevOps engineer based in
-                  Ahmedabad, Gujarat.
+                  This project was designed, built, and deployed by Dhairya Shah — a full-stack developer & DevOps
+                  engineer based in Ahmedabad, Gujarat.
                 </p>
                 <Link to="/about" className={styles.sideLink}>
                   About Dhairya Shah <ArrowRight size={14} />
+                </Link>
+                <Link to="/projects" className={styles.sideLink}>
+                  Browse All Case Studies <ArrowRight size={14} />
                 </Link>
               </div>
             </aside>
           </div>
 
+          {/* Related Cluster Projects */}
           {related.length > 0 && (
             <div className={styles.relatedBlock}>
-              <h2 className={styles.sectionHeading}>Related Projects</h2>
+              <h2 className={styles.sectionHeading}>Related Technical Case Studies</h2>
               <div className={styles.relatedGrid}>
                 {related.map((rel) => (
                   <Link key={rel.slug} to={`/projects/${rel.slug}`} className={styles.relatedCard}>
                     <span className={styles.relatedName}>{rel.name}</span>
                     <span className={styles.relatedCategory}>{rel.category}</span>
                     <ArrowRight size={14} className={styles.relatedArrow} />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Related Engineering Guides & Technical Articles */}
+          {relatedBlogs.length > 0 && (
+            <div className={styles.relatedBlock}>
+              <h2 className={styles.sectionHeading}>Related Engineering Guides & Architecture Breakdowns</h2>
+              <div className={styles.relatedGrid}>
+                {relatedBlogs.map((b) => (
+                  <Link key={b.slug} to={`/blogs/${b.slug}`} className={styles.relatedCard}>
+                    <span className={styles.relatedCategory}>{b.clusterTopic}</span>
+                    <span className={styles.relatedName}>{b.title}</span>
+                    <span className={styles.relatedMetaSmall}>{b.readingTime} · Read Guide →</span>
                   </Link>
                 ))}
               </div>

@@ -1,5 +1,34 @@
-# robots.txt — crawl guidance only. This is NOT a security or rate-limiting mechanism.
+# robots.txt — crawl guidance & AI engine eligibility
 User-agent: *
 Allow: /
+
+# Core search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# AI answer/training crawlers — explicitly permitted for informational content & GEO citations
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Non-content / raw script paths
+Disallow: /assets/*.map
 
 Sitemap: https://www.aboutdhairya.me/sitemap.xml

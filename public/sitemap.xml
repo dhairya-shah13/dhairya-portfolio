@@ -2,23 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.aboutdhairya.me/</loc>
+    <lastmod>2026-08-21</lastmod>
   </url>
   <url>
     <loc>https://www.aboutdhairya.me/about</loc>
+    <lastmod>2026-08-21</lastmod>
   </url>
   <url>
     <loc>https://www.aboutdhairya.me/projects</loc>
+    <lastmod>2026-08-21</lastmod>
   </url>
   <url>
     <loc>https://www.aboutdhairya.me/projects/akids-enterprise</loc>
+    <lastmod>2026-08-21</lastmod>
   </url>
   <url>
     <loc>https://www.aboutdhairya.me/projects/meghdoot-motors</loc>
+    <lastmod>2026-08-21</lastmod>
   </url>
   <url>
     <loc>https://www.aboutdhairya.me/projects/fintrack</loc>
+    <lastmod>2026-08-21</lastmod>
   </url>
   <url>
     <loc>https://www.aboutdhairya.me/projects/shrinath</loc>
+    <lastmod>2026-08-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.aboutdhairya.me/blogs</loc>
+    <lastmod>2026-08-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.aboutdhairya.me/blogs/ssg-vs-ssr-vs-spa-web-rendering-guide</loc>
+    <lastmod>2026-08-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.aboutdhairya.me/blogs/docker-github-actions-linux-vps-cicd-guide</loc>
+    <lastmod>2026-08-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.aboutdhairya.me/blogs/mongodb-vs-postgresql-schema-design-guide</loc>
+    <lastmod>2026-08-21</lastmod>
   </url>
 </urlset>

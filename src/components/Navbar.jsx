@@ -87,6 +87,9 @@ function Navbar() {
             <Link to="/projects" className={styles.navLink}>
               Projects
             </Link>
+            <Link to="/blogs" className={styles.navLink}>
+              Blog
+            </Link>
             <a href="#skills" onClick={(e) => goToSection(e, 'skills')} className={styles.navLink}>
               Skills
             </a>
@@ -185,6 +188,7 @@ function Navbar() {
                   { to: '/', label: 'Home', isLink: true },
                   { to: '/about', label: 'About', isLink: true },
                   { to: '/projects', label: 'Projects', isLink: true },
+                  { to: '/blogs', label: 'Blog', isLink: true },
                   { to: 'skills', label: 'Skills', isLink: false },
                   { to: 'contact', label: 'Contact', isLink: false }
                 ].map((item, idx) => {

@@ -1,9 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ExternalLink, FileText, Mail } from 'lucide-react';
-import Seo from '../components/Seo.jsx';
-import JsonLd from '../components/JsonLd.jsx';
-import { contact, resumeUrl } from '../data/person.js';
+import React from "react";
+import { Link } from "react-router-dom";
+import { motion } from "motion/react";
+import { ExternalLink, FileText, Mail, ArrowRight } from "lucide-react";
+import Seo from "../components/Seo.jsx";
+import JsonLd from "../components/JsonLd.jsx";
+import { contact, resumeUrl } from "../data/person.js";
 import {
   skillsData,
   educationData,
@@ -11,37 +12,82 @@ import {
   achievementsData,
   experienceData,
   focusAreasData,
-} from '../data/siteContent.js';
-import { buildPersonSchema, buildProfilePageSchema, buildFaqSchema } from '../data/schema.js';
-import styles from './AboutPage.module.css';
+} from "../data/siteContent.js";
+import {
+  buildPersonSchema,
+  buildProfilePageSchema,
+  buildFaqSchema,
+  buildBreadcrumbSchema,
+} from "../data/schema.js";
+import styles from "./AboutPage.module.css";
+
+const aboutTldr = [
+  "Full-Stack Developer & DevOps Engineer based in Ahmedabad, Gujarat, India.",
+  "Shipped 6 live products end-to-end spanning MERN and Django/Flask architectures.",
+  "Led two concurrent engineering teams at Vassu Infotech, delivering enterprise ERP and inventory systems to production.",
+  "Hands-on expertise in Docker containerization, CI/CD deployment pipelines (GitHub Actions), and Linux VPS provisioning.",
+  "Pursuing B.Tech in IT at CHARUSAT with Microsoft Azure AI-900 fundamentals certification.",
+];
 
 const faq = [
   {
-    question: 'Who is Dhairya Shah?',
+    question: "Who is Dhairya Shah?",
     answer:
-      'Dhairya Shah is a full-stack developer and DevOps engineer based in Ahmedabad, Gujarat, India. He builds and deploys web products end-to-end — MERN and Django/Flask applications, Docker containerization, CI/CD pipelines, and cloud deployment — and has led engineering teams taking software from concept to production.',
+      "Dhairya Shah is a full-stack developer and DevOps engineer based in Ahmedabad, Gujarat, India. He builds and deploys web products end-to-end — MERN and Django/Flask applications, Docker containerization, CI/CD pipelines, and cloud deployment — and has led engineering teams taking software from concept to production.",
   },
   {
-    question: 'What does Dhairya Shah do?',
+    question: "What does Dhairya Shah do?",
     answer:
-      'He designs, builds, and ships production software: full-stack web applications, REST APIs, database schemas, and deployment infrastructure. At Vassu Infotech he led development and deployment of VassuERP, an enterprise resource planning system, and StockFlow, an inventory management system.',
+      "He designs, builds, and ships production software: full-stack web applications, REST APIs, database schemas, and deployment infrastructure. At Vassu Infotech he led development and deployment of VassuERP, an enterprise resource planning system, and StockFlow, an inventory management system.",
   },
   {
-    question: 'What technologies does Dhairya Shah use?',
+    question: "What technologies does Dhairya Shah specialize in?",
     answer:
-      'Python, Java, Kotlin, JavaScript, C, and C++ across the stack, with React.js, Node.js, Express.js, Django, and Flask for applications; SQL and MongoDB for data; and Docker, GitHub Actions CI/CD, Linux shell scripting, Git/GitHub, and Hostinger VPS for infrastructure.',
+      "Python, Java, Kotlin, JavaScript, C, and C++ across the stack, with React.js, Node.js, Express.js, Django, and Flask for applications; SQL and MongoDB for data; and Docker, GitHub Actions CI/CD, Linux shell scripting, Git/GitHub, and Hostinger VPS for infrastructure.",
   },
   {
-    question: 'Where did Dhairya Shah study?',
+    question:
+      "How does Dhairya Shah approach full-stack application architecture?",
     answer:
-      'He is pursuing a B.Tech in Information Technology at Charotar University of Science and Technology (CHARUSAT), and completed Class XII at Seventh Day Adventist Higher Secondary School (94%) and Class X at Divine Gurukulam (92%).',
+      "Dhairya designs decoupled, maintainable architectures with clear API contracts between responsive client interfaces (React.js) and performant backend services (Node.js/Express or Django/Flask), backed by structured SQL or MongoDB databases and automated Docker containerization.",
   },
   {
-    question: 'How can I contact Dhairya Shah?',
+    question: "What DevOps and CI/CD pipelines has Dhairya implemented?",
     answer:
-      `By email at ${contact.email}, by phone at ${contact.phoneDisplay}, or through his GitHub and LinkedIn profiles linked on this page.`,
+      "Dhairya implements automated CI/CD workflows using GitHub Actions, containerizes microservices with Docker, and writes custom Linux shell provisioning scripts for Linux VPS environments (e.g., Hostinger VPS).",
+  },
+  {
+    question: "Where did Dhairya Shah study?",
+    answer:
+      "He is pursuing a B.Tech in Information Technology at Charotar University of Science and Technology (CHARUSAT), and completed Class XII at Seventh Day Adventist Higher Secondary School (94%) and Class X at Divine Gurukulam (92%).",
+  },
+  {
+    question: "What live products has Dhairya Shah shipped?",
+    answer:
+      "Dhairya has shipped six products including Akids Enterprise (e-commerce platform), Meghdoot Motors (service center portal), FinTrack (finance management web & Android app), Shrinath (sales monitoring system), Aarisha (collaborative platform), and HRMS.",
+  },
+  {
+    question: "How can I contact Dhairya Shah for opportunities or consulting?",
+    answer: `By email at ${contact.email}, by phone at ${contact.phoneDisplay}, or through his GitHub and LinkedIn profiles linked on this page.`,
   },
 ];
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08, delayChildren: 0.05 },
+  },
+};
+
+const fadeUpItem = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.35, ease: [0.4, 0, 0.2, 1] },
+  },
+};
 
 function AboutPage() {
   return (
@@ -52,21 +98,36 @@ function AboutPage() {
         path="/about"
       />
       <JsonLd data={buildPersonSchema()} />
-      <JsonLd data={buildProfilePageSchema('/about')} />
+      <JsonLd data={buildProfilePageSchema("/about")} />
       <JsonLd data={buildFaqSchema(faq)} />
+      <JsonLd
+        data={buildBreadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+        ])}
+      />
 
       {/* Header */}
       <section className={`section-dark ${styles.headerSection}`}>
         <div className="container">
           <div className={styles.heroGrid}>
-            <div className={styles.textBlock}>
+            <motion.div
+              className={styles.textBlock}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
+            >
               <p className={styles.eyebrow}>About</p>
               <h1 className={styles.title}>Dhairya Shah</h1>
-              <p className={styles.subline}>Full-Stack Developer & DevOps Engineer — Ahmedabad, Gujarat</p>
+              <p className={styles.subline}>
+                Full-Stack Developer & DevOps Engineer — Ahmedabad, Gujarat
+              </p>
               <p className={styles.identity}>
-                Dhairya Shah is a full-stack developer and DevOps engineer who ships products end-to-end — from
-                database schema to server provisioning to production URL. He led two engineering teams at Vassu
-                Infotech and has six live products shipped across the MERN and Django/Flask stacks.
+                Dhairya Shah is a full-stack developer and DevOps engineer who
+                ships products end-to-end — from database schema to server
+                provisioning to production URL. He led two engineering teams at
+                Vassu Infotech and has six live products shipped across the MERN
+                and Django/Flask stacks.
               </p>
               <div className={styles.ctaRow}>
                 <a href={resumeUrl} className={styles.primaryBtn} download>
@@ -77,15 +138,35 @@ function AboutPage() {
                   <Mail size={16} />
                   Get in Touch
                 </Link>
-                <a href={contact.github} target="_blank" rel="noopener noreferrer" className={styles.ghostBtn}>
+                <a
+                  href={contact.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.ghostBtn}
+                >
                   GitHub <ExternalLink size={14} />
                 </a>
-                <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" className={styles.ghostBtn}>
+                <a
+                  href={contact.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.ghostBtn}
+                >
                   LinkedIn <ExternalLink size={14} />
                 </a>
               </div>
-            </div>
-            <div className={styles.photoColumn}>
+            </motion.div>
+
+            <motion.div
+              className={styles.photoColumn}
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{
+                duration: 0.5,
+                delay: 0.1,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+            >
               <div className={styles.photoFrame}>
                 <img
                   src="/images/dhairya-shah.jpg"
@@ -95,42 +176,72 @@ function AboutPage() {
                   height={640}
                 />
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Who is Dhairya Shah? (AEO) */}
+      {/* Who is Dhairya Shah? (AEO) & TL;DR */}
       <section className="section-light section-padding">
         <div className="container">
           <div className={styles.aeoBlock}>
+            {/* TL;DR Summary Block for AI/Human Rapid Extraction */}
+            <div className={styles.tldrBox}>
+              <p className={styles.tldrTitle}>Executive Summary (TL;DR)</p>
+              <ul className={styles.tldrList}>
+                {aboutTldr.map((bullet, idx) => (
+                  <li key={idx} className={styles.tldrItem}>
+                    <strong>{bullet.split(" ")[0]}</strong>{" "}
+                    {bullet.slice(bullet.indexOf(" ") + 1)}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
             <p className={styles.eyebrow}>In short</p>
             <h2 className={styles.sectionTitle}>Who is Dhairya Shah?</h2>
             <p className={styles.aeoAnswer}>
-              Dhairya Shah is a full-stack developer and DevOps engineer based in Ahmedabad, Gujarat, India, who
-              builds reliable web products from database to deployed URL. He is proficient across the MERN stack
-              (MongoDB, Express, React, Node.js) and Python frameworks (Django, Flask), manages infrastructure with
-              Docker, GitHub Actions CI/CD and Linux shell scripting, and has led concurrent engineering teams taking
-              products to company-wide production use.
+              Dhairya Shah is a full-stack developer and DevOps engineer based
+              in Ahmedabad, Gujarat, India, who builds reliable web products
+              from database to deployed URL. He is proficient across the MERN
+              stack (MongoDB, Express, React, Node.js) and Python frameworks
+              (Django, Flask), manages infrastructure with Docker, GitHub
+              Actions CI/CD and Linux shell scripting, and has led concurrent
+              engineering teams taking products to company-wide production use.
             </p>
-            <div className={styles.quickFacts}>
-              <div className={styles.factItem}>
+
+            <motion.div
+              className={styles.quickFacts}
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+            >
+              <motion.div className={styles.factItem} variants={fadeUpItem}>
                 <span className={styles.factLabel}>Role</span>
-                <span className={styles.factValue}>Full-Stack Developer & DevOps Engineer</span>
-              </div>
-              <div className={styles.factItem}>
+                <span className={styles.factValue}>
+                  Full-Stack Developer & DevOps Engineer
+                </span>
+              </motion.div>
+              <motion.div className={styles.factItem} variants={fadeUpItem}>
                 <span className={styles.factLabel}>Location</span>
-                <span className={styles.factValue}>Ahmedabad, Gujarat, India</span>
-              </div>
-              <div className={styles.factItem}>
+                <span className={styles.factValue}>
+                  Ahmedabad, Gujarat, India
+                </span>
+              </motion.div>
+              <motion.div className={styles.factItem} variants={fadeUpItem}>
                 <span className={styles.factLabel}>Shipped</span>
-                <span className={styles.factValue}>6 live products end-to-end</span>
-              </div>
-              <div className={styles.factItem}>
+                <span className={styles.factValue}>
+                  6 live products end-to-end
+                </span>
+              </motion.div>
+              <motion.div className={styles.factItem} variants={fadeUpItem}>
                 <span className={styles.factLabel}>Leadership</span>
-                <span className={styles.factValue}>2 engineering teams led at Vassu Infotech</span>
-              </div>
-            </div>
+                <span className={styles.factValue}>
+                  2 engineering teams led at Vassu Infotech
+                </span>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -142,17 +253,29 @@ function AboutPage() {
             <p className={styles.eyebrow}>Services & Domain</p>
             <h2 className={styles.sectionTitle}>Professional Focus</h2>
           </div>
-          <div className={styles.focusList}>
+          <motion.div
+            className={styles.focusList}
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {focusAreasData.map((item) => (
-              <div key={item.id} className={styles.focusRow}>
-                <span className={`${styles.focusIndex} numeral`}>{item.id}</span>
+              <motion.div
+                key={item.id}
+                className={styles.focusRow}
+                variants={fadeUpItem}
+              >
+                <span className={`${styles.focusIndex} numeral`}>
+                  {item.id}
+                </span>
                 <div className={styles.focusContent}>
                   <h3 className={styles.focusTitle}>{item.title}</h3>
                   <p className={styles.focusDesc}>{item.description}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -163,9 +286,19 @@ function AboutPage() {
             <p className={styles.eyebrow}>Capabilities & Stack</p>
             <h2 className={styles.sectionTitle}>Skills</h2>
           </div>
-          <div className={styles.skillsGrid}>
+          <motion.div
+            className={styles.skillsGrid}
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {skillsData.map((group) => (
-              <div key={group.category} className={styles.skillCard}>
+              <motion.div
+                key={group.category}
+                className={styles.skillCard}
+                variants={fadeUpItem}
+              >
                 <h3 className={styles.skillCategory}>{group.category}</h3>
                 <div className={styles.pillsContainer}>
                   {group.items.map((skill) => (
@@ -174,15 +307,21 @@ function AboutPage() {
                     </span>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Experience */}
-      <section className="section-light" style={{ borderTop: '1px solid var(--border-current)' }}>
-        <div className="container" style={{ paddingTop: 0, paddingBottom: 140 }}>
+      <section
+        className="section-light"
+        style={{ borderTop: "1px solid var(--border-current)" }}
+      >
+        <div
+          className="container"
+          style={{ paddingTop: 0, paddingBottom: 140 }}
+        >
           <div className={styles.sectionHeader}>
             <p className={styles.eyebrow}>Professional History</p>
             <h2 className={styles.sectionTitle}>Experience</h2>
@@ -190,7 +329,9 @@ function AboutPage() {
           <div className={styles.experienceCard}>
             <div className={styles.experienceHeader}>
               <h3 className={styles.experienceRole}>{experienceData.role}</h3>
-              <span className={styles.experienceCompany}>{experienceData.company}</span>
+              <span className={styles.experienceCompany}>
+                {experienceData.company}
+              </span>
               <span className={styles.experienceMeta}>
                 {experienceData.period} · {experienceData.orgSize}
               </span>
@@ -208,8 +349,14 @@ function AboutPage() {
       </section>
 
       {/* Education & Certifications */}
-      <section className="section-light" style={{ borderTop: '1px solid var(--border-current)' }}>
-        <div className="container" style={{ paddingTop: 0, paddingBottom: 140 }}>
+      <section
+        className="section-light"
+        style={{ borderTop: "1px solid var(--border-current)" }}
+      >
+        <div
+          className="container"
+          style={{ paddingTop: 0, paddingBottom: 140 }}
+        >
           <div className={styles.eduGrid}>
             <div className={styles.eduColumn}>
               <div className={styles.sectionHeader}>
@@ -218,7 +365,9 @@ function AboutPage() {
               </div>
               {educationData.map((item) => (
                 <div key={item.detail} className={styles.eduRow}>
-                  <span className={`${styles.period} numeral`}>{item.period}</span>
+                  <span className={`${styles.period} numeral`}>
+                    {item.period}
+                  </span>
                   <div className={styles.eduContent}>
                     <h3 className={styles.eduDetail}>{item.detail}</h3>
                     <p className={styles.eduInstitution}>{item.institution}</p>
@@ -245,8 +394,9 @@ function AboutPage() {
                 </a>
               ))}
               <p className={styles.certNote}>
-                Including Microsoft Azure AI Fundamentals (AI-900) exam preparation — foundational AI/ML knowledge,
-                not professional AI/ML engineering experience.
+                Including Microsoft Azure AI Fundamentals (AI-900) exam
+                preparation — foundational AI/ML knowledge, not professional
+                AI/ML engineering experience.
               </p>
             </div>
           </div>
@@ -254,8 +404,14 @@ function AboutPage() {
       </section>
 
       {/* Achievements */}
-      <section className="section-light" style={{ borderTop: '1px solid var(--border-current)' }}>
-        <div className="container" style={{ paddingTop: 0, paddingBottom: 140 }}>
+      <section
+        className="section-light"
+        style={{ borderTop: "1px solid var(--border-current)" }}
+      >
+        <div
+          className="container"
+          style={{ paddingTop: 0, paddingBottom: 140 }}
+        >
           <div className={styles.sectionHeader}>
             <p className={styles.eyebrow}>Honors & Highlights</p>
             <h2 className={styles.sectionTitle}>Achievements</h2>
@@ -303,10 +459,12 @@ function AboutPage() {
         <div className="container">
           <div className={styles.ctaBlock}>
             <h2 className={styles.ctaTitle}>
-              Working on a project that <span className="text-accent">ships</span>?
+              Working on a project that{" "}
+              <span className="text-accent">ships</span>?
             </h2>
             <p className={styles.ctaSubline}>
-              Dhairya is open to full-stack, cloud, and DevOps engineering opportunities.
+              Dhairya is open to full-stack, cloud, and DevOps engineering
+              opportunities.
             </p>
             <Link to="/#contact" className={styles.ctaButton}>
               Get In Touch

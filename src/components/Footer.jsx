@@ -39,6 +39,9 @@ function Footer() {
               <Link to="/projects" className={styles.link}>
                 Projects
               </Link>
+              <Link to="/blogs" className={styles.link}>
+                Blog
+              </Link>
               <a href="#skills" onClick={(e) => handleSectionClick(e, 'skills')} className={styles.link}>
                 Skills
               </a>

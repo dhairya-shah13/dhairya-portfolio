@@ -97,23 +97,35 @@ export const focusAreasData = [
     title: 'Full-Stack Development',
     description:
       'MERN & Django/Flask, coordinating API contracts between React/Node front ends and Python back ends.',
+    link: '/projects',
+    guideLink: '/blogs/ssg-vs-ssr-vs-spa-web-rendering-guide',
+    guideLabel: 'Read Rendering Guide →',
   },
   {
     id: '02',
     title: 'Cloud & DevOps',
     description:
       'Docker containerization, GitHub Actions CI/CD, Linux shell scripting, Hostinger VPS provisioning.',
+    link: '/about',
+    guideLink: '/blogs/docker-github-actions-linux-vps-cicd-guide',
+    guideLabel: 'Read DevOps Guide →',
   },
   {
     id: '03',
     title: 'Team & Project Leadership',
     description:
       'Led two concurrent engineering teams at Vassu Infotech, taking both products to company-wide production use.',
+    link: '/about',
+    guideLink: '/projects',
+    guideLabel: 'Browse Case Studies →',
   },
   {
     id: '04',
     title: 'Database Design',
     description: 'SQL and MongoDB schema design across ERP, inventory, and finance-tracking systems.',
+    link: '/projects/fintrack',
+    guideLink: '/blogs/mongodb-vs-postgresql-schema-design-guide',
+    guideLabel: 'Read Database Guide →',
   },
 ];
 

@@ -1,5 +1,45 @@
 # Changelog
 
+## [2026-08-21 20:38] — Liquid Glass Design System & Fluid Ambient Depth (UISKILL.md)
+**Type:** UI | Design System | Glassmorphism | Motion | Tokens | Accessibility
+**Page(s):** All pages (`/`, `/about`, `/projects`, `/projects/:slug`, `/blogs`, `/blogs/:slug`)
+**Summary:** Transformed the website visual presentation with a premium Liquid Glass aesthetic. Introduced multi-layer backdrop refraction (`backdrop-filter: blur(16px) saturate(180%)`), specular top light bevels (`inset 0 1px 1px 0 rgba(...)`), and GPU-composited ambient fluid liquid orbs (`liquidOrb1`, `liquidOrb2`) with keyframe animation (`liquidFloatSlow`, `liquidFloatFast`). Elevated floating navbar capsule, 3D tilt project cards, focus domain panels, technical comparison tables, TL;DR executive callouts, and author bio cards. Verified 100% hydration, 7/7 UX test passes, zero JS exceptions, and full reduced-motion accessibility.
+**Keyword(s) targeted:** Liquid Glass, Glassmorphism, UI Polish, Design Tokens, Web Aesthetics
+**Files touched:** `src/index.css`, `src/components/Navbar.module.css`, `src/components/Hero.jsx`, `src/components/Hero.module.css`, `src/components/FeaturedWork.module.css`, `src/components/FocusAreas.module.css`, `src/pages/BlogsPage.module.css`, `src/pages/BlogPostPage.module.css`, `src/pages/ProjectsPage.module.css`, `src/pages/ProjectPage.module.css`, `src/pages/AboutPage.module.css`, `Context.md`, `Changelog.md`
+**Audit trigger:** User instruction to apply a Liquid Glass effect across the website.
+
+## [2026-08-21 20:31] — Bidirectional Internal Linking Architecture (SEO.md §11)
+**Type:** Internal Linking | Content | IA | SEO | Architecture
+**Page(s):** All pages (`/`, `/about`, `/projects`, `/projects/:slug`, `/blogs`, `/blogs/:slug`)
+**Summary:** Implemented comprehensive bidirectional internal linking network across all 6 technical case studies, 3 engineering comparison guides, and homepage narrative blocks. Connected case studies to matching architectural blog posts and vice versa; added interactive guide deep-links to `FocusAreas.jsx`; embedded keyword-rich contextual links inside `About.jsx` and `Intro.jsx`; eliminated orphan pages; and ensured crawl depth <= 2 across the entire site. Verified 100% hydration and 0 broken links.
+**Keyword(s) targeted:** Internal Linking, Information Architecture, Topic Clusters, Crawl Depth
+**Files touched:** `src/data/projects.js`, `src/data/blogs.js`, `src/data/siteContent.js`, `src/pages/ProjectPage.jsx`, `src/pages/ProjectPage.module.css`, `src/pages/BlogPostPage.jsx`, `src/components/About.jsx`, `src/components/Intro.jsx`, `src/components/FocusAreas.jsx`, `Context.md`, `Changelog.md`
+**Audit trigger:** User instruction to implement best-level internal linking across the entire website.
+
+## [2026-08-21 20:24] — UI/UX Style Consistency & Motion Choreography (UISKILL.md)
+**Type:** UI | Motion | Tokens | Accessibility | Verification
+**Page(s):** All routes (`/`, `/about`, `/projects`, `/projects/:slug`, `/blogs`, `/blogs/:slug`)
+**Summary:** Executed full design system, micro-interaction, and motion choreography audit in accordance with `UISKILL.md`. Standardized interactive press states (`:active { transform: scale(0.98); }`), implemented custom tinted scrollbars for responsive tables in `index.css`, integrated Framer Motion staggered entrance animations (`staggerChildren: 0.08–0.1`) across `BlogsPage`, `ProjectsPage`, and `AboutPage`, and ensured 100% site-wide navigation parity by adding the Blog link to `Footer.jsx`. Verified 7/7 automated UX tests, 0 JS console exceptions, and instant fallbacks for reduced-motion users.
+**Keyword(s) targeted:** UI Consistency, Motion Choreography, Accessibility, Web Performance
+**Files touched:** `src/index.css`, `src/components/Footer.jsx`, `src/pages/BlogsPage.jsx`, `src/pages/ProjectsPage.jsx`, `src/pages/AboutPage.jsx`, `Context.md`, `Changelog.md`
+**Audit trigger:** User instruction to apply UISKILL.md for website-wide UI style consistency and aesthetic polish.
+
+## [2026-08-21 20:13] — Technical Blog Hub, Trending Comparisons & AEO/GEO Content
+**Type:** Content | Technical | Schema | Sitemap | Routing | Audit
+**Page(s):** `/blogs`, `/blogs/ssg-vs-ssr-vs-spa-web-rendering-guide`, `/blogs/docker-github-actions-linux-vps-cicd-guide`, `/blogs/mongodb-vs-postgresql-schema-design-guide`
+**Summary:** Created dedicated Technical Blog Hub (`/blogs`) and three in-depth comparison/engineering guides matching the website's signature design system. Implemented high-contrast comparison matrices, direct-answer blocks (AEO), TL;DR bullet summaries, and Schema.org `TechArticle`, `BreadcrumbList`, and `FAQPage` graphs. Integrated dynamic SSG prerendering in `routes.jsx`, added Blog navigation link across desktop and mobile menus in `Navbar.jsx`, updated `sitemap.xml` with all 11 canonical routes with fresh `<lastmod>`, and verified 100% hydration with 0 JS exceptions.
+**Keyword(s) targeted:** `SSG vs SSR vs SPA`, `Modern Web Architecture 2026`, `Docker GitHub Actions CI/CD Pipeline`, `Linux VPS Deployment 2026`, `MongoDB vs PostgreSQL 2026`, `Document vs Relational Schema Design`
+**Files touched:** `src/data/blogs.js`, `src/data/schema.js`, `src/pages/BlogsPage.jsx`, `src/pages/BlogsPage.module.css`, `src/pages/BlogPostPage.jsx`, `src/pages/BlogPostPage.module.css`, `src/routes.jsx`, `src/components/Navbar.jsx`, `public/sitemap.xml`, `Context.md`, `Changelog.md`
+**Audit trigger:** User request to create a new blog page with website theme consistency, trending engineering comparison content, and full SEO/AEO/GEO optimization.
+
+## [2026-08-21 20:05] — End-to-End SEO, AEO, GEO & Topical Content Clustering
+**Type:** Content | Technical | Schema | Sitemap | Robots | Audit
+**Page(s):** `/`, `/about`, `/projects`, `/projects/akids-enterprise`, `/projects/fintrack`, `/projects/meghdoot-motors`, `/projects/shrinath`
+**Summary:** Executed full-lifecycle SEO, AEO, GEO, and topical content clustering optimization in strict compliance with RULES.md and SEO.md. Implemented explicit AI-crawler management in `robots.txt` (GPTBot, ClaudeBot, PerplexityBot, etc.), updated `sitemap.xml` with verified `<lastmod>` timestamps, enriched Schema.org JSON-LD graphs (`Person`, `WebSite`, `ProfilePage`, `FAQPage`, `BreadcrumbList`, `SoftwareApplication`), generated universal TL;DR bullet summaries and AEO direct-answer blocks across all routes, structured deep technical case studies with specification tables and engineering highlights, established a 3-pillar topical clustering architecture, and verified 100% hydration and CSP compliance across all 7 routes with 0 JS exceptions.
+**Keyword(s) targeted:** `Dhairya Shah Full-Stack Developer`, `DevOps Engineer Ahmedabad`, `MERN & Django Developer`, `Akids Enterprise E-commerce Case Study`, `FinTrack Personal Finance App`, `Meghdoot Motors Service Center Website`, `Shrinath Sales Monitoring System`
+**Files touched:** `public/robots.txt`, `public/sitemap.xml`, `src/data/projects.js`, `src/data/schema.js`, `src/pages/AboutPage.jsx`, `src/pages/AboutPage.module.css`, `src/pages/ProjectsPage.jsx`, `src/pages/ProjectsPage.module.css`, `src/pages/ProjectPage.jsx`, `src/pages/ProjectPage.module.css`, `Context.md`, `Changelog.md`
+**Audit trigger:** User instruction to execute end-to-end SEO, AEO, and GEO optimization with topical content clustering per RULES.md and SEO.md.
+
 ## [2026-08-20 12:32]
 
 ### [Category: UI] — Custom Motion, Smooth Scroll, and Animated Hamburger Button
